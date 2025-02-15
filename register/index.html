@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productivity assistant</title>
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productivity-Assistant</title>
+    <link rel="stylesheet" href="style.css" />
     <script src="index.js" defer></script>
-</head>
-<body>
-    <div class="tasklist">
-
-    </div>
-</body>
+  </head>
+  <body>
+    <form id="registerForm">
+      <h2>Register</h2>
+      <label for="name">Enter your Name</label>
+      <input type="text" id="name" placeholder="Name" required />
+      <label for="username">Enter your email</label>
+      <input type="text" id="username" placeholder="abc12@gmail.com" required />
+      <label for="password">Enter your password</label>
+      <input type="password" id="password" placeholder="Password" required />
+      <label for="confirmPassword">Re-Enter your password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        placeholder="Confirm Password"
+        required
+      />
+      <button type="submit">Sign Up</button>
+      <div class="signin">
+        Don't have an account?
+        <a href="/login/index.html">Go to Sign in</a>
+      </div>
+    </form>
+  </body>
 </html>
