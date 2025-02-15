@@ -1,0 +1,74 @@
+html,
+body {
+  font-family: "Poppins", sans-serif;
+
+  font-size: 16px;
+  margin: 0px 0px 0px 0px;
+
+  h2 {
+    display: grid;
+    justify-self: center;
+  }
+
+  form {
+    display: grid;
+    margin-left: 16px;
+    margin-right: 16px;
+
+    label {
+      margin-bottom: 8px;
+    }
+
+    input {
+      margin-bottom: 32px;
+      border-radius: 12px;
+      height: 32px;
+    }
+
+    button {
+      margin-top: 32px;
+      border-radius: 12px;
+      margin-bottom: 32px;
+      height: 32px;
+    }
+
+    .signup {
+      justify-self: center;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media (width > 832px) {
+  form {
+    width: 800px;
+    display: grid;
+    justify-self: center;
+
+    label {
+      margin-bottom: 8px;
+    }
+
+    input {
+      margin-bottom: 32px;
+      border-radius: 12px;
+      height: 32px;
+    }
+
+    button {
+      margin-top: 32px;
+      border-radius: 12px;
+      margin-bottom: 32px;
+      height: 32px;
+    }
+
+    .signup {
+      justify-self: center;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}
