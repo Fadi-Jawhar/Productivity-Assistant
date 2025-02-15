@@ -10,6 +10,13 @@ body {
     justify-self: center;
   }
 
+  img{
+    justify-self: center;
+    max-width: 200px;
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
+
   form {
     display: grid;
     margin-left: 16px;
