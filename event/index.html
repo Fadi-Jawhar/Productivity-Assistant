@@ -1,15 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Productivity assistant</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="index.js" defer></script>
-</head>
-<body>
-    <div class="tasklist">
+    <!DOCTYPE html>
+    <html lang="sv">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Event Planner</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+          }
+          .past-event {
+            color: gray;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Event Planner</h1>
 
-    </div>
-</body>
+        <form id="event-form">
+          <label for="event-name">Händelsenamn:</label>
+          <input type="text" id="event-name" required />
+
+          <label for="event-start">Starttid:</label>
+          <input type="datetime-local" id="event-start" required />
+
+          <label for="event-end">Sluttid:</label>
+          <input type="datetime-local" id="event-end" required />
+
+          <button type="submit">Lägg till</button>
+        </form>
+
+        <label for="filter">Filtrera:</label>
+        <select id="filter">
+          <option value="all">Alla</option>
+          <option value="upcoming">Kommande</option>
+          <option value="past">Tidigare</option>
+        </select>
+
+        <h2>Kommande händelser</h2>
+        <ul id="event-list"></ul>
+
+        <h2>Tidigare händelser</h2>
+        <ul id="past-event-list"></ul>
+      </body>
+    </html>
+  </head>
 </html>
