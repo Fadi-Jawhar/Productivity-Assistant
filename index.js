@@ -7,11 +7,21 @@ if (user) {
   ).innerHTML = `Hello ${parsedUser.name}`;
   document.getElementById("logoutButton").classList.remove("hidden");
 
-  document.getElementById("addButton").addEventListener("click", () => {
+  document.getElementById("addTaskButton").addEventListener("click", () => {
     let userTasklistUpdate = JSON.parse(localStorage.getItem("user"));
-
     userTasklistUpdate.tasklist.push("Lemon");
     localStorage.setItem("user", JSON.stringify(userTasklistUpdate));
+    alert("Add successful!");
+    window.location.href = "/index.html";
+  });
+
+  document.getElementById("addEventButton").addEventListener("click", () => {
+    let userEventListUpdate = JSON.parse(localStorage.getItem("user"));
+    let name = "Test Event";
+    let start = new Date();
+    let end = new Date();
+    userEventListUpdate.eventlist.push({ id: Date.now(), name, start, end });
+    localStorage.setItem("user", JSON.stringify(userEventListUpdate));
     alert("Add successful!");
     window.location.href = "/index.html";
   });
