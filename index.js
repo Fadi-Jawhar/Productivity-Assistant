@@ -6,6 +6,8 @@ if (user) {
     "welcomeMessage"
   ).innerHTML = `Hello ${parsedUser.name}`;
   document.getElementById("logoutButton").classList.remove("hidden");
+  document.getElementById("addTaskButton").classList.remove("hidden");
+  document.getElementById("addEventButton").classList.remove("hidden");
 
   document.getElementById("addTaskButton").addEventListener("click", () => {
     let userTasklistUpdate = JSON.parse(localStorage.getItem("user"));
