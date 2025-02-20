@@ -9,11 +9,24 @@
   </head>
   <body>
     <header>
-      <a href="/">
-        <img src="home.png" alt="home icon" />
-      </a>
-      <button id="logoutButton" class="hidden">Logout</button>
-      <button id="loginButton" class="hidden">Login</button>
+      <div class="row">
+        <div class="column1">
+          <a href="/">
+            <img src="home.png" alt="home icon" />
+          </a>
+        </div>
+        <div class="column2">
+          <div id="addMenu" class="hidden">
+            <a href="/calendar/index.html">Calendar</a>
+            <a href="/habit/index.html">Habit</a>
+            <a href="/event/index.html">Event</a>
+          </div>
+        </div>
+        <div class="column3">
+          <button id="logoutButton" class="hidden">Logout</button>
+          <button id="loginButton" class="hidden">Login</button>
+        </div>
+      </div>
     </header>
     <h1 id="welcomeMessage">Hello</h1>
     <div class="button-list">

@@ -9,6 +9,7 @@ if (user) {
   document.getElementById("logoutButton").classList.remove("hidden");
   document.getElementById("addTaskButton").classList.remove("hidden");
   document.getElementById("addEventButton").classList.remove("hidden");
+  document.getElementById("addMenu").classList.remove("hidden");
 
   document.getElementById("addTaskButton").addEventListener("click", () => {
     let userTasklistUpdate = JSON.parse(localStorage.getItem("user"));
