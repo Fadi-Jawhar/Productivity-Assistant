@@ -38,6 +38,7 @@ body {
         align-self: center;
 
         a {
+          display: none;
           padding: 1rem;
           text-decoration: none;
         }
@@ -76,5 +77,14 @@ body {
   }
 
   @media (width > 832px) {
+    header {
+      .row {
+        .column2 {
+          a {
+            display: initial;
+          }
+        }
+      }
+    }
   }
 }
