@@ -8,6 +8,13 @@ body {
 
   header {
     justify-self: center;
+    a {
+      text-decoration: none;
+
+      img {
+        width: 50px;
+      }
+    }
   }
 
   .hidden {
