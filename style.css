@@ -1,0 +1,25 @@
+html,
+body {
+  font-family: "Poppins", sans-serif;
+
+  font-size: 16px;
+  margin: 0px 0px 0px 0px;
+
+  justify-self: center;
+  .hidden {
+    display: none;
+  }
+  
+  .button-list {
+    justify-self: center;
+    button {
+      margin-top: 32px;
+      border-radius: 12px;
+      margin-bottom: 32px;
+      height: 32px;
+    }
+  }
+
+  @media (width > 832px) {
+  }
+}
