@@ -1,17 +1,119 @@
 html,
 body {
   font-family: "Poppins", sans-serif;
-
   font-size: 16px;
   margin: 0px 0px 0px 0px;
+  width: 100%;
+  justify-items: center;
 
-  justify-self: center;
+  header {
+    justify-self: center;
+    max-width: 1280px;
+    width: 100%;
+
+    .row {
+      display: flex;
+      width: 100%;
+
+      .column1 {
+        width: 20%;
+        display: grid;
+        justify-content: start;
+        align-self: center;
+        padding: 1rem;
+
+        a {
+          text-decoration: none;
+
+          img {
+            width: 50px;
+          }
+        }
+      }
+
+      .column2 {
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+
+        a {
+          display: none;
+          padding: 1rem;
+          font-weight: 600;
+          color: black;
+          text-decoration: none;
+          transition: transform 0.15s;
+        }
+      }
+
+      .column3 {
+        width: 20%;
+        display: grid;
+        justify-content: end;
+        padding: 1rem;
+
+        /*  button {
+          justify-self: center;
+          margin-top: 32px;
+          border-radius: 12px;
+          margin-bottom: 32px;
+          height: 32px;
+        } */
+
+        /* CSS */
+        button {
+          appearance: none;
+          background-color: transparent;
+          border: 2px solid #1a1a1a;
+          border-radius: 12px;
+          box-sizing: border-box;
+          color: #3b3b3b;
+          cursor: pointer;
+          font-size: 1rem;
+          font-weight: 600;
+          line-height: normal;
+          margin: 0;
+          min-height: 50px;
+          min-width: 0;
+          outline: none;
+          padding: 16px 24px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          width: 100%;
+          will-change: transform;
+        }
+
+        button:disabled {
+          pointer-events: none;
+        }
+
+        button:hover {
+          color: #fff;
+          background-color: #1a1a1a;
+          box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+          transform: translateY(-2px);
+        }
+
+        button:active {
+          box-shadow: none;
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+
   .hidden {
     display: none;
   }
-  
+
   .button-list {
-    justify-self: center;
+    justify-self: end;
+
     button {
       margin-top: 32px;
       border-radius: 12px;
@@ -21,5 +123,17 @@ body {
   }
 
   @media (width > 832px) {
+    header {
+      .row {
+        .column2 {
+          a {
+            display: initial;
+          }
+          a:hover {
+            color: gray;
+          }
+        }
+      }
+    }
   }
 }

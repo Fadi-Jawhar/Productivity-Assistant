@@ -5,9 +5,11 @@ if (user) {
   document.getElementById(
     "welcomeMessage"
   ).innerHTML = `Hello ${parsedUser.name}`;
+  document.getElementById("loginButton").classList.add("hidden");
   document.getElementById("logoutButton").classList.remove("hidden");
   document.getElementById("addTaskButton").classList.remove("hidden");
   document.getElementById("addEventButton").classList.remove("hidden");
+  document.getElementById("addMenu").classList.remove("hidden");
 
   document.getElementById("addTaskButton").addEventListener("click", () => {
     let userTasklistUpdate = JSON.parse(localStorage.getItem("user"));
@@ -28,6 +30,7 @@ if (user) {
     window.location.href = "/index.html";
   });
 } else {
+  document.getElementById("loginButton").classList.remove("hidden");
   document.getElementById(
     "welcomeMessage"
   ).innerHTML = `Hello, please <a href='/login/index.html'>login</a>.`;
@@ -37,5 +40,9 @@ document.getElementById("logoutButton").addEventListener("click", () => {
   let userUpdate = JSON.parse(localStorage.getItem("user"));
   localStorage.setItem(userUpdate.username, JSON.stringify(userUpdate));
   localStorage.removeItem("user");
+  window.location.href = "/index.html";
+});
+
+document.getElementById("loginButton").addEventListener("click", () => {
   window.location.href = "/login/index.html";
 });
