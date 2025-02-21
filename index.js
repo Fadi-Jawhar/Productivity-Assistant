@@ -6,6 +6,8 @@ if (user) {
   document.getElementById(
     "welcomeMessage"
   ).innerHTML = `Hello ${loggedInUser.name}`;
+  document.getElementById("navLogoutButton").classList.remove("hidden");
+  document.getElementById("navLink").classList.remove("hidden");
   document.getElementById("loginButton").classList.add("hidden");
   document.getElementById("logoutButton").classList.remove("hidden");
   document.getElementById("addTaskButton").classList.remove("hidden");
@@ -31,11 +33,21 @@ if (user) {
     window.location.href = "/index.html";
   });
 } else {
+  document.getElementById("navLoginButton").classList.remove("hidden");
   document.getElementById("loginButton").classList.remove("hidden");
   document.getElementById(
     "welcomeMessage"
   ).innerHTML = `Hello, please <a href='/login/index.html'>login</a>.`;
 }
+
+document.getElementById("navLogoutButton").addEventListener("click", () => {
+  sessionStorage.removeItem("user");
+  window.location.href = "/index.html";
+});
+
+document.getElementById("navLoginButton").addEventListener("click", () => {
+  window.location.href = "/login/index.html";
+});
 
 document.getElementById("logoutButton").addEventListener("click", () => {
   sessionStorage.removeItem("user");
