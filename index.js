@@ -1,11 +1,31 @@
 let user = JSON.parse(sessionStorage.getItem("user"));
-console.log(user);
 
 if (user) {
-  let loggedInUser = JSON.parse(localStorage.getItem(user));
-  document.getElementById(
-    "welcomeMessage"
-  ).innerHTML = `Hello ${loggedInUser.name}`;
+  let getData = async (url) => {
+    try {
+      let response = await fetch("https://api.adviceslip.com/advice");
+      let json = await response.json();
+      return json;
+    } catch (error) {
+      let h2 = document.createElement("h2");
+      h2.innerText =
+        "Oj, något gick fel! Testa igen senare eller kontakta webbutvecklaren som tabbat sig. Error meddelande: " +
+        error;
+      document.body.append(h2);
+    }
+  };
+
+  let getAdvice = async () => {
+    let advice = await getData("https://api.adviceslip.com/advice");
+    console.log(advice.slip.advice);
+    let loggedInUser = JSON.parse(localStorage.getItem(user));
+    document.getElementById(
+      "welcomeMessage"
+    ).innerHTML = `Hello ${loggedInUser.name},<br> ${advice.slip.advice}`;
+  };
+
+  getAdvice();
+
   document.getElementById("navLogoutButton").classList.remove("hidden");
   document.getElementById("navLink").classList.remove("hidden");
   document.getElementById("loginButton").classList.add("hidden");
