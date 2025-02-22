@@ -109,7 +109,7 @@
 
   .nav-button {
     margin: 1rem;
-    
+
     button {
       background-color: var(--foreground);
       border: none;
@@ -248,6 +248,10 @@ body {
       margin-bottom: 32px;
       height: 32px;
     }
+  }
+
+  ul {
+    list-style-type: none;
   }
 
   @media (width > 832px) {
