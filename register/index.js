@@ -29,3 +29,11 @@ document
     alert("Registration successful! Please login.");
     window.location.href = "/login/index.html";
   });
+
+document.getElementById("navLoginButton").addEventListener("click", () => {
+  window.location.href = "/login/index.html";
+});
+
+document.getElementById("loginButton").addEventListener("click", () => {
+  window.location.href = "/login/index.html";
+});
