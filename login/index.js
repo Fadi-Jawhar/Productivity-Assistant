@@ -17,3 +17,11 @@ document.getElementById("loginForm").addEventListener("submit", (e) => {
     alert("User not found");
   }
 });
+
+document.getElementById("navLoginButton").addEventListener("click", () => {
+  window.location.href = "/login/index.html";
+});
+
+document.getElementById("loginButton").addEventListener("click", () => {
+  window.location.href = "/login/index.html";
+});
