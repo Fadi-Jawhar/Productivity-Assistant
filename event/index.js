@@ -2,11 +2,11 @@ let user = JSON.parse(sessionStorage.getItem("user"));
 
 if (user) {
 
-document.getElementById("navLogoutButton").classList.remove("hidden");
-document.getElementById("navLink").classList.remove("hidden");
-document.getElementById("loginButton").classList.add("hidden");
-document.getElementById("logoutButton").classList.remove("hidden");
-document.getElementById("addMenu").classList.remove("hidden");
+document.querySelector("#navLogoutButton").classList.remove("hidden");
+document.querySelector("#navLink").classList.remove("hidden");
+document.querySelector("#loginButton").classList.add("hidden");
+document.querySelector("#logoutButton").classList.remove("hidden");
+document.querySelector("#addMenu").classList.remove("hidden");
 
 document.querySelector("#userLoggedIn").classList.remove("hidden");
 
@@ -17,8 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const filterSelect = document.querySelector("#filter");
 
     let events = JSON.parse(localStorage.getItem(user));
-    
-    //let events = JSON.parse(localStorage.getItem("events")) || [];
 
     eventForm.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -37,20 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
         eventForm.reset();
     });
 
-   /*  document.getElementById("addEventButton").addEventListener("click", () => {
-        let userEventListUpdate = JSON.parse(localStorage.getItem(user));
-        let name = "Test Event";
-        let start = new Date();
-        let end = new Date();
-        userEventListUpdate.eventlist.push({ id: Date.now(), name, start, end });
-        localStorage.setItem(user, JSON.stringify(userEventListUpdate));
-        alert("Add successful!");
-        window.location.href = "/index.html";
-      }); */
-
     function saveEvent() {
-        //localStorage.setItem("events", JSON.stringify(events));
-        
+        events.eventlist.sort((a, b) => new Date(a.start) - new Date(b.start));
         localStorage.setItem(user, JSON.stringify(events));
         renderEvents();
     }
@@ -59,6 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
         eventList.innerHTML = "";
         pastEventList.innerHTML = "";
         const now = new Date();
+
+        events.eventlist.sort((a, b) => new Date(a.start) - new Date(b.start));
+
 
         events.eventlist.forEach(event => {
             const eventItem = document.createElement("li");
@@ -104,21 +93,21 @@ document.addEventListener("DOMContentLoaded", function () {
     renderEvents();
 });
 
-document.getElementById("navLogoutButton").addEventListener("click", () => {
-    sessionStorage.removeItem("user");
+document.querySelector("#navLogoutButton").addEventListener("click", () => {
+sessionStorage.removeItem("user");
     window.location.href = "/index.html";
   });
   
-  document.getElementById("navLoginButton").addEventListener("click", () => {
+  document.querySelector("#navLoginButton").addEventListener("click", () => {
     window.location.href = "/login/index.html";
   });
   
-  document.getElementById("logoutButton").addEventListener("click", () => {
+  document.querySelector("#logoutButton").addEventListener("click", () => {
     sessionStorage.removeItem("user");
     window.location.href = "/index.html";
   });
   
-  document.getElementById("loginButton").addEventListener("click", () => {
+  document.querySelector("#loginButton").addEventListener("click", () => {
     window.location.href = "/login/index.html";
   });
 }
