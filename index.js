@@ -24,7 +24,8 @@ if (user) {
     ).innerHTML = `Hello ${loggedInUser.name},<br> ${advice.slip.advice}`;
   };
 
-  getAdvice();
+  // Aktivera senare för api anrop
+  //getAdvice();
 
   document.getElementById("navLogoutButton").classList.remove("hidden");
   document.getElementById("navLink").classList.remove("hidden");
@@ -33,6 +34,16 @@ if (user) {
   document.getElementById("addTaskButton").classList.remove("hidden");
   document.getElementById("addEventButton").classList.remove("hidden");
   document.getElementById("addMenu").classList.remove("hidden");
+
+  let loggedInUser = JSON.parse(localStorage.getItem(user));
+  let eventList = document.getElementById("event-list");
+  var ul = document.createElement("ul");
+  loggedInUser.eventlist.forEach((event) => {
+    var li = document.createElement("li");
+    li.innerHTML = `Event: ${event.start}`;
+    ul.appendChild(li);
+  });
+  eventList.appendChild(ul);
 
   document.getElementById("addTaskButton").addEventListener("click", () => {
     let userTasklistUpdate = JSON.parse(localStorage.getItem(user));
