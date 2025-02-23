@@ -25,7 +25,7 @@ if (user) {
   };
 
   // Aktivera senare för api anrop
-  //getAdvice();
+  getAdvice();
 
   document.getElementById("navLogoutButton").classList.remove("hidden");
   document.getElementById("navLink").classList.remove("hidden");
