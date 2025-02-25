@@ -1,15 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productivity assistant</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="index.js" defer></script>
-</head>
-<body>
-    <div class="tasklist">
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="todo.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="row">
+        <div class="column1">
+          <a href="/">
+            <img src="home.png" alt="home icon" />
+          </a>
+        </div>
+        <div class="column2">
+          <div id="addMenu" class="hidden">
+            <a href="/task/index.html">ToDo</a>
+            <a href="/habit/index.html">Habit</a>
+            <a href="/event/index.html">Event</a>
+          </div>
+        </div>
+        <div class="column3">
+          <div class="header-hamburger-menu">
+            <label class="hamburger-menu">
+              <input type="checkbox" />
+            </label>
+            <aside class="sidebar">
+              <nav>
+                <div id="navLink" class="hidden">
+                  <div class="nav-link">
+                    <a href="/task/index.html">ToDo</a>
+                  </div>
+                  <div class="nav-link">
+                    <a href="/habit/index.html">Habit</a>
+                  </div>
+                  <div class="nav-link">
+                    <a href="/event/index.html">Event</a>
+                  </div>
+                </div>
+                <div class="nav-button">
+                  <button id="navLoginButton" class="hidden">Login</button>
+                  <button id="navLogoutButton" class="hidden">Logout</button>
+                </div>
+              </nav>
+            </aside>
+          </div>
+          <div class="login-logout-button">
+            <button id="logoutButton" class="hidden">Logout</button>
+            <button id="loginButton" class="hidden">Login</button>
+          </div>
+        </div>
+      </div>
+    </header>
 
+    <div id="userLoggedIn" class="hidden">
+      <h1>To-Do List</h1>
+
+      <form id="todo-form">
+        <label for="todo-title">Titel:</label>
+        <input type="text" id="todo-title" required />
+
+        <label for="todo-description">Beskrivning:</label>
+        <textarea id="todo-description" required></textarea>
+
+        <label for="todo-category">Kategori:</label>
+        <select id="todo-category">
+          <option value="halsa">Hälsa</option>
+          <option value="hushall">Hushåll</option>
+          <option value="jobb">Jobbrelaterat</option>
+          <option value="noje">Nöje</option>
+        </select>
+
+        <label for="todo-time">Tidsestimat (minuter):</label>
+        <input type="number" id="todo-time" required />
+
+        <label for="todo-deadline">Deadline:</label>
+        <input type="date" id="todo-deadline" required />
+
+        <button type="submit">Lägg till</button>
+      </form>
+
+      <label for="filter-status">Filtrera efter status:</label>
+      <select id="filter-status">
+        <option value="all">Alla</option>
+        <option value="completed">Slutförda</option>
+        <option value="not-completed">Ej slutförda</option>
+      </select>
+
+      <label for="filter-category">Filtrera efter kategori:</label>
+      <select id="filter-category">
+        <option value="all">Alla</option>
+        <option value="halsa">Hälsa</option>
+        <option value="hushall">Hushåll</option>
+        <option value="jobb">Jobbrelaterat</option>
+        <option value="noje">Nöje</option>
+      </select>
+
+      <label for="sort-select">Sortera efter:</label>
+      <select id="sort-select">
+        <option value="deadline">Deadline</option>
+        <option value="time">Tidsestimat</option>
+        <option value="status">Status</option>
+      </select>
+
+      <h2>Ärendelista</h2>
+      <ul id="todo-list"></ul>
     </div>
-</body>
+  </body>
 </html>
