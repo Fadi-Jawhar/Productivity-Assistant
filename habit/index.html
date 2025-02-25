@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productivity assistant</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="index.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habit Tracker</title>
+  <link rel="stylesheet" href="/habit/style.css">
+  <script src="index.js" defer></script>
 </head>
 <body>
-    <div class="tasklist">
-
-    </div>
+  <h1>Habits</h1>
+  <form id="habitForm">
+    <input type="text" id="habitTitle" placeholder="Lägg till ny habit..." required />
+    <select id="habitPriority">
+      <option value="låg">Låg</option>
+      <option value="mellan">Mellan</option>
+      <option value="hög">Hög</option>
+    </select>
+    <button type="submit">Lägg till</button>
+  </form>
+  <div id="habitsList"></div>
 </body>
 </html>
