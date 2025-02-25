@@ -6,13 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
     localStorage.setItem("habits", JSON.stringify(initialHabits));
   }
+
   loadHabits();
+  setupFilters();
+  setupSorting();
 });
 
-function loadHabits() {
+function loadHabits(habits = null) {
   const habitsList = document.getElementById("habitsList");
   habitsList.innerHTML = "";
-  const habits = JSON.parse(localStorage.getItem("habits")) || []; 
+  habits = habits || JSON.parse(localStorage.getItem("habits")) || [];
 
   habits.forEach(habit => {
     const habitDiv = document.createElement("div");
@@ -32,59 +35,35 @@ function loadHabits() {
 
 document.getElementById("habitForm").addEventListener("submit", (e) => {
   e.preventDefault();
-  const habitTitle = document.getElementById("habitTitle");
-  const habitPriority = document.getElementById("habitPriority");
+  const habitTitle = document.getElementById("habitTitle").value;
+  const habitPriority = document.getElementById("habitPriority").value;
 
   let habits = JSON.parse(localStorage.getItem("habits")) || [];
   const newHabit = {
     id: Date.now(),
-    title: habitTitle.value,
+    title: habitTitle,
     repetitions: 0,
-    priority: habitPriority.value
+    priority: habitPriority
   };
 
   habits.push(newHabit);
   localStorage.setItem("habits", JSON.stringify(habits));
-  habitTitle.value = "";
+  document.getElementById("habitTitle").value = "";
   loadHabits();
 });
 
 function incrementHabit(id) {
-  let habits = JSON.parse(localStorage.getItem("habits"));
-  habits = habits.map(habit => {
-    if (habit.id === id) {
-      habit.repetitions++;
-    }
-    return habit;
-  });
-  localStorage.setItem("habits", JSON.stringify(habits));
-  loadHabits();
+  updateHabit(id, habit => habit.repetitions++);
 }
 
 function decrementHabit(id) {
-  let habits = JSON.parse(localStorage.getItem("habits"));
-  habits = habits.map(habit => {
-    if (habit.id === id) {
-      if (habit.repetitions > 0) {
-        habit.repetitions--;
-      }
-    }
-    return habit;
+  updateHabit(id, habit => {
+    if (habit.repetitions > 0) habit.repetitions--;
   });
-  localStorage.setItem("habits", JSON.stringify(habits));
-  loadHabits();
 }
 
 function resetHabit(id) {
-  let habits = JSON.parse(localStorage.getItem("habits"));
-  habits = habits.map(habit => {
-    if (habit.id === id) {
-      habit.repetitions = 0;
-    }
-    return habit;
-  });
-  localStorage.setItem("habits", JSON.stringify(habits));
-  loadHabits();
+  updateHabit(id, habit => habit.repetitions = 0);
 }
 
 function deleteHabit(id) {
@@ -92,4 +71,46 @@ function deleteHabit(id) {
   habits = habits.filter(habit => habit.id !== id);
   localStorage.setItem("habits", JSON.stringify(habits));
   loadHabits();
+}
+
+function updateHabit(id, callback) {
+  let habits = JSON.parse(localStorage.getItem("habits"));
+  habits = habits.map(habit => {
+    if (habit.id === id) callback(habit);
+    return habit;
+  });
+  localStorage.setItem("habits", JSON.stringify(habits));
+  loadHabits();
+}
+
+function setupFilters() {
+  document.getElementById("priorityFilter").addEventListener("change", (e) => {
+    const selectedPriority = e.target.value;
+    let habits = JSON.parse(localStorage.getItem("habits")) || [];
+    const filteredHabits = selectedPriority !== "alla"
+      ? habits.filter(habit => habit.priority === selectedPriority)
+      : habits;
+    loadHabits(filteredHabits);
+  });
+}
+
+function setupSorting() {
+  document.getElementById("sortSelect").addEventListener("change", (e) => {
+    const sortOption = e.target.value;
+    let habits = JSON.parse(localStorage.getItem("habits")) || [];
+
+    if (sortOption === "repetitions-asc") {
+      habits.sort((a, b) => a.repetitions - b.repetitions);
+    } else if (sortOption === "repetitions-desc") {
+      habits.sort((a, b) => b.repetitions - a.repetitions);
+    } else if (sortOption === "priority-asc") {
+      const priorityOrder = { "hög": 1, "mellan": 2, "låg": 3 };
+      habits.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+    } else if (sortOption === "priority-desc") {
+      const priorityOrder = { "hög": 1, "mellan": 2, "låg": 3 };
+      habits.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);
+    }
+
+    loadHabits(habits);
+  });
 }
