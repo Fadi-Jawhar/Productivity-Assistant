@@ -35,15 +35,38 @@ if (user) {
   document.getElementById("addEventButton").classList.remove("hidden");
   document.getElementById("addMenu").classList.remove("hidden");
 
+
+
+
+
   let loggedInUser = JSON.parse(localStorage.getItem(user));
+
+  let taskList = document.getElementById("task-list");
+  var ul = document.createElement("ul");
+  loggedInUser.tasklist.forEach((task) => {
+    var li = document.createElement("li");
+    li.innerHTML = `Task: ${task}`;
+    ul.appendChild(li);
+  });
+  taskList.appendChild(ul);
+
+
   let eventList = document.getElementById("event-list");
   var ul = document.createElement("ul");
   loggedInUser.eventlist.forEach((event) => {
     var li = document.createElement("li");
-    li.innerHTML = `Event: ${event.start}`;
+    li.innerHTML = `Event: ${event.name}, Start: ${event.start}`;
     ul.appendChild(li);
   });
   eventList.appendChild(ul);
+
+
+
+
+
+
+
+
 
   document.getElementById("addTaskButton").addEventListener("click", () => {
     let userTasklistUpdate = JSON.parse(localStorage.getItem(user));
