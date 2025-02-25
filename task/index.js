@@ -1,112 +1,129 @@
-document.addEventListener("DOMContentLoaded", function () {
-    let user = JSON.parse(sessionStorage.getItem("user"));
-    if (!user) {
-        window.location.href = "/login/index.html";
-        return;
-    }
+let user = JSON.parse(sessionStorage.getItem("user"));
+
+if (user) {
+    document.querySelector("#navLogoutButton").classList.remove("hidden");
+document.querySelector("#navLink").classList.remove("hidden");
+document.querySelector("#loginButton").classList.add("hidden");
+document.querySelector("#logoutButton").classList.remove("hidden");
+document.querySelector("#addMenu").classList.remove("hidden");
+    document.querySelector("#userLoggedIn").classList.remove("hidden");
     
     const todoForm = document.querySelector("#todo-form");
     const todoList = document.querySelector("#todo-list");
-    const filterStatus = document.querySelector("#filter-status");
-    const filterCategory = document.querySelector("#filter-category");
-    const sortSelect = document.querySelector("#sort-select");
-    
-    let todos = JSON.parse(localStorage.getItem("todos")) || [];
-    
+    const filterSelect = document.querySelector("#filter");
+    const sortSelect = document.querySelector("#sort");
+
+    let todos = JSON.parse(localStorage.getItem(user)) || { todolist: [] };
+
     todoForm.addEventListener("submit", function (e) {
         e.preventDefault();
         
         const title = document.querySelector("#todo-title").value;
         const description = document.querySelector("#todo-description").value;
-        const estimatedTime = parseInt(document.querySelector("#todo-time").value);
+        const timeEstimate = parseInt(document.querySelector("#todo-time").value);
         const category = document.querySelector("#todo-category").value;
-        const deadline = new Date(document.querySelector("#todo-deadline").value);
-        
-        if (!title || !description || !category || isNaN(estimatedTime) || !deadline) {
-            alert("Vänligen fyll i alla fält!");
-            return;
-        }
-        
-        todos.push({
-            id: Date.now(),
-            title,
-            description,
-            status: false,
-            estimatedTime,
-            category,
-            deadline,
+        const deadline = document.querySelector("#todo-deadline").value;
+
+        todos.tasklist.push({ 
+            id: Date.now(), 
+            title, 
+            description, 
+            timeEstimate, 
+            category, 
+            deadline, 
+            completed: false 
         });
-        
+
         saveTodos();
         todoForm.reset();
     });
-    
+
     function saveTodos() {
-        localStorage.setItem("todos", JSON.stringify(todos));
+        localStorage.setItem(user, JSON.stringify(todos));
         renderTodos();
     }
-    
+
     function renderTodos() {
         todoList.innerHTML = "";
-        let filteredTodos = [...todos];
         
-        if (filterStatus.value !== "all") {
-            const isCompleted = filterStatus.value === "completed";
-            filteredTodos = filteredTodos.filter(todo => todo.status === isCompleted);
-        }
+        let filteredTodos = todos.tasklist.filter(todo => {
+            if (filterSelect.value === "all") return true;
+            return filterSelect.value === "true" ? todo.completed : !todo.completed;
+        });
         
-        if (filterCategory.value !== "all") {
-            filteredTodos = filteredTodos.filter(todo => todo.category === filterCategory.value);
-        }
-        
-        if (sortSelect.value === "deadline") {
-            filteredTodos.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
-        } else if (sortSelect.value === "time") {
-            filteredTodos.sort((a, b) => a.estimatedTime - b.estimatedTime);
-        } else if (sortSelect.value === "status") {
-            filteredTodos.sort((a, b) => a.status - b.status);
-        }
-        
+        filteredTodos.sort((a, b) => {
+            if (sortSelect.value === "deadline") {
+                return new Date(a.deadline) - new Date(b.deadline);
+            } else if (sortSelect.value === "timeEstimate") {
+                return a.timeEstimate - b.timeEstimate;
+            }
+        });
+
         filteredTodos.forEach(todo => {
             const todoItem = document.createElement("li");
-            todoItem.innerHTML = `
-                <strong>${todo.title}</strong> (${todo.category}) - ${todo.estimatedTime} min <br>
-                Deadline: ${new Date(todo.deadline).toLocaleDateString()} <br>
-                Status: ${todo.status ? "✔ Slutförd" : "❌ Ej slutförd"} <br>
-                <button onclick="toggleStatus(${todo.id})">Markera som ${todo.status ? "Ej slutförd" : "Slutförd"}</button>
-                <button onclick="editTodo(${todo.id})">Redigera</button>
-                <button onclick="deleteTodo(${todo.id})">Ta bort</button>
-            `;
+            todoItem.innerHTML = `${todo.title} - ${todo.category} - ${todo.deadline} (${todo.timeEstimate} min)`;
+            
+            const toggleBtn = document.createElement("button");
+            toggleBtn.textContent = todo.completed ? "Markera som ej slutförd" : "Markera som slutförd";
+            toggleBtn.onclick = () => {
+                todo.completed = !todo.completed;
+                saveTodos();
+            };
+            
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Ta bort";
+            deleteBtn.onclick = () => {
+                todos.tasklist = todos.tasklist.filter(t => t.id !== todo.id);
+                saveTodos();
+            };
+            
+            const editBtn = document.createElement("button");
+            editBtn.textContent = "Redigera";
+            editBtn.onclick = () => editTodo(todo);
+
+            todoItem.appendChild(toggleBtn);
+            todoItem.appendChild(editBtn);
+            todoItem.appendChild(deleteBtn);
+
+            if (todo.completed) {
+                todoItem.style.textDecoration = "line-through";
+            }
+
             todoList.appendChild(todoItem);
         });
     }
-    
-    window.toggleStatus = function (id) {
-        const todo = todos.find(t => t.id === id);
-        todo.status = !todo.status;
-        saveTodos();
-    };
-    
-    window.deleteTodo = function (id) {
-        todos = todos.filter(todo => todo.id !== id);
-        saveTodos();
-    };
-    
-    window.editTodo = function (id) {
-        const todo = todos.find(t => t.id === id);
+
+    function editTodo(todo) {
         document.querySelector("#todo-title").value = todo.title;
         document.querySelector("#todo-description").value = todo.description;
-        document.querySelector("#todo-time").value = todo.estimatedTime;
+        document.querySelector("#todo-time").value = todo.timeEstimate;
         document.querySelector("#todo-category").value = todo.category;
-        document.querySelector("#todo-deadline").value = new Date(todo.deadline).toISOString().slice(0, 10);
+        document.querySelector("#todo-deadline").value = todo.deadline;
         
-        todos = todos.filter(t => t.id !== id);
+        todos.tasklist = todos.tasklist.filter(t => t.id !== todo.id);
         saveTodos();
-    };
-    
-    filterStatus.addEventListener("change", renderTodos);
-    filterCategory.addEventListener("change", renderTodos);
+    }
+
+    filterSelect.addEventListener("change", renderTodos);
     sortSelect.addEventListener("change", renderTodos);
     
     renderTodos();
-});
+
+    document.querySelector("#navLogoutButton").addEventListener("click", () => {
+        sessionStorage.removeItem("user");
+            window.location.href = "/index.html";
+          });
+          
+          document.querySelector("#navLoginButton").addEventListener("click", () => {
+            window.location.href = "/login/index.html";
+          });
+          
+          document.querySelector("#logoutButton").addEventListener("click", () => {
+            sessionStorage.removeItem("user");
+            window.location.href = "/index.html";
+          });
+          
+          document.querySelector("#loginButton").addEventListener("click", () => {
+            window.location.href = "/login/index.html";
+          });
+        }
