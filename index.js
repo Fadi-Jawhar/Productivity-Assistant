@@ -50,19 +50,23 @@ if (user) {
   });
   taskList.appendChild(ul);
 
-
   let eventList = document.getElementById("event-list");
   var ul = document.createElement("ul");
   loggedInUser.eventlist.forEach((event) => {
     var li = document.createElement("li");
-    li.innerHTML = `Event: ${event.name}, Start: ${event.start}`;
+    li.innerHTML = `Event: ${event.name}, Start: ${event.start}, End: ${event.start}`;
     ul.appendChild(li);
   });
   eventList.appendChild(ul);
 
-
-
-
+  let habitList = document.getElementById("habit-list");
+  var ul = document.createElement("ul");
+  loggedInUser.habitlist.forEach((habit) => {
+    var li = document.createElement("li");
+    li.innerHTML = `Title: ${habit.title}, Repetitions: ${habit.priority}`;
+    ul.appendChild(li);
+  });
+  habitList.appendChild(ul);
 
 
 
