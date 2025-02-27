@@ -239,17 +239,6 @@ body {
     display: none;
   }
 
-  .button-list {
-    justify-self: end;
-
-    button {
-      margin-top: 32px;
-      border-radius: 12px;
-      margin-bottom: 32px;
-      height: 32px;
-    }
-  }
-
   ul {
     list-style-type: none;
   }
