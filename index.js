@@ -38,13 +38,24 @@ if (user) {
 
   let loggedInUser = JSON.parse(localStorage.getItem(user));
 
+  let filteredTaskList = loggedInUser.tasklist.filter((task) => {
+    if (task.completed === false) return true;
+  });
+  console.log(filteredTaskList);
+  const reversedFilteredTaskList = filteredTaskList.reverse();
   let taskList = document.getElementById("task-list");
   var ul = document.createElement("ul");
-  loggedInUser.tasklist.forEach((task) => {
-    var li = document.createElement("li");
-    li.innerHTML = `Task: ${task.title}`;
-    ul.appendChild(li);
-  });
+  for (let i = 0; i < 3; i++) {
+    console.log(reversedFilteredTaskList[i]);
+    if (reversedFilteredTaskList[i]) {
+      var li = document.createElement("li");
+      li.innerHTML = `Title: ${reversedFilteredTaskList[i].title}
+        , Category: ${reversedFilteredTaskList[i].category}
+        , Deadline: ${reversedFilteredTaskList[i].deadline} 
+        (${reversedFilteredTaskList[i].timeEstimate} min)`;
+      ul.appendChild(li);
+    }
+  }
   taskList.appendChild(ul);
 
   let eventList = document.getElementById("event-list");
@@ -64,7 +75,6 @@ if (user) {
     ul.appendChild(li);
   });
   habitList.appendChild(ul);
-
 } else {
   document.getElementById("navLoginButton").classList.remove("hidden");
   document.getElementById("loginButton").classList.remove("hidden");
