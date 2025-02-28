@@ -41,12 +41,10 @@ if (user) {
   let filteredTaskList = loggedInUser.tasklist.filter((task) => {
     if (task.completed === false) return true;
   });
-  console.log(filteredTaskList);
   const reversedFilteredTaskList = filteredTaskList.reverse();
   let taskList = document.getElementById("task-list");
   var ul = document.createElement("ul");
   for (let i = 0; i < 3; i++) {
-    console.log(reversedFilteredTaskList[i]);
     if (reversedFilteredTaskList[i]) {
       var li = document.createElement("li");
       li.innerHTML = `Title: ${reversedFilteredTaskList[i].title}
@@ -58,6 +56,20 @@ if (user) {
   }
   taskList.appendChild(ul);
 
+  sortedHabitList = loggedInUser.habitlist.sort(
+    (a, b) => b.repetitions - a.repetitions
+  );
+  let habitList = document.getElementById("habit-list");
+  var ul = document.createElement("ul");
+  for (let i = 0; i < 3; i++) {
+    if (sortedHabitList[i]) {
+      var li = document.createElement("li");
+      li.innerHTML = `${sortedHabitList[i].title} (Prioritet: ${sortedHabitList[i].priority}) - Reps: ${sortedHabitList[i].repetitions}`;
+      ul.appendChild(li);
+    }
+  }
+  habitList.appendChild(ul);
+
   let eventList = document.getElementById("event-list");
   var ul = document.createElement("ul");
   loggedInUser.eventlist.forEach((event) => {
@@ -66,15 +78,6 @@ if (user) {
     ul.appendChild(li);
   });
   eventList.appendChild(ul);
-
-  let habitList = document.getElementById("habit-list");
-  var ul = document.createElement("ul");
-  loggedInUser.habitlist.forEach((habit) => {
-    var li = document.createElement("li");
-    li.innerHTML = `Title: ${habit.title}, Repetitions: ${habit.priority}`;
-    ul.appendChild(li);
-  });
-  habitList.appendChild(ul);
 } else {
   document.getElementById("navLoginButton").classList.remove("hidden");
   document.getElementById("loginButton").classList.remove("hidden");
