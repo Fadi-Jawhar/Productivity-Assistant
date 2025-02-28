@@ -24,72 +24,67 @@ if (user) {
     ).innerHTML = `Hello ${loggedInUser.name},<br> ${advice.slip.advice}`;
   };
 
-  // Aktivera senare för api anrop
   getAdvice();
 
   document.getElementById("navLogoutButton").classList.remove("hidden");
   document.getElementById("navLink").classList.remove("hidden");
   document.getElementById("loginButton").classList.add("hidden");
   document.getElementById("logoutButton").classList.remove("hidden");
-  document.getElementById("addTaskButton").classList.remove("hidden");
-  document.getElementById("addEventButton").classList.remove("hidden");
   document.getElementById("addMenu").classList.remove("hidden");
-
-
-
-
+  document.getElementById("task-list-button").classList.remove("hidden");
+  document.getElementById("habit-list-button").classList.remove("hidden");
+  document.getElementById("event-list-button").classList.remove("hidden");
 
   let loggedInUser = JSON.parse(localStorage.getItem(user));
 
+  let filteredTaskList = loggedInUser.tasklist.filter((task) => {
+    if (task.completed === false) return true;
+  });
+  const reversedFilteredTaskList = filteredTaskList.reverse();
   let taskList = document.getElementById("task-list");
   var ul = document.createElement("ul");
-  loggedInUser.tasklist.forEach((task) => {
-    var li = document.createElement("li");
-    li.innerHTML = `Task: ${task}`;
-    ul.appendChild(li);
-  });
+  for (let i = 0; i < 3; i++) {
+    if (reversedFilteredTaskList[i]) {
+      var li = document.createElement("li");
+      li.innerHTML = `Title: ${reversedFilteredTaskList[i].title}
+        , Category: ${reversedFilteredTaskList[i].category}
+        , Deadline: ${reversedFilteredTaskList[i].deadline} 
+        (${reversedFilteredTaskList[i].timeEstimate} min)`;
+      ul.appendChild(li);
+    }
+  }
   taskList.appendChild(ul);
 
-  let eventList = document.getElementById("event-list");
-  var ul = document.createElement("ul");
-  loggedInUser.eventlist.forEach((event) => {
-    var li = document.createElement("li");
-    li.innerHTML = `Event: ${event.name}, Start: ${event.start}, End: ${event.start}`;
-    ul.appendChild(li);
-  });
-  eventList.appendChild(ul);
-
+  sortedHabitList = loggedInUser.habitlist.sort(
+    (a, b) => b.repetitions - a.repetitions
+  );
   let habitList = document.getElementById("habit-list");
   var ul = document.createElement("ul");
-  loggedInUser.habitlist.forEach((habit) => {
-    var li = document.createElement("li");
-    li.innerHTML = `Title: ${habit.title}, Repetitions: ${habit.priority}`;
-    ul.appendChild(li);
-  });
+  for (let i = 0; i < 3; i++) {
+    if (sortedHabitList[i]) {
+      var li = document.createElement("li");
+      li.innerHTML = `${sortedHabitList[i].title} (Prioritet: ${sortedHabitList[i].priority}) - Reps: ${sortedHabitList[i].repetitions}`;
+      ul.appendChild(li);
+    }
+  }
   habitList.appendChild(ul);
 
-
-
-
-
-  document.getElementById("addTaskButton").addEventListener("click", () => {
-    let userTasklistUpdate = JSON.parse(localStorage.getItem(user));
-    userTasklistUpdate.tasklist.push("Lemon");
-    localStorage.setItem(user, JSON.stringify(userTasklistUpdate));
-    alert("Add successful!");
-    window.location.href = "/index.html";
+  let filteredEventList = loggedInUser.eventlist.filter((event) => {
+    if (new Date(event.end) > new Date()) return true;
   });
-
-  document.getElementById("addEventButton").addEventListener("click", () => {
-    let userEventListUpdate = JSON.parse(localStorage.getItem(user));
-    let name = "Test Event";
-    let start = new Date();
-    let end = new Date();
-    userEventListUpdate.eventlist.push({ id: Date.now(), name, start, end });
-    localStorage.setItem(user, JSON.stringify(userEventListUpdate));
-    alert("Add successful!");
-    window.location.href = "/index.html";
-  });
+  sortedEventList = filteredEventList.sort(
+    (a, b) => new Date(a.start) - new Date(b.start)
+  );
+  let eventList = document.getElementById("event-list");
+  var ul = document.createElement("ul");
+  for (let i = 0; i < 3; i++) {
+    if (sortedEventList[i]) {
+      var li = document.createElement("li");
+      li.innerHTML = `Event: ${sortedEventList[i].name}, Start: ${sortedEventList[i].start}, End: ${sortedEventList[i].start}`;
+      ul.appendChild(li);
+    }
+  }
+  eventList.appendChild(ul);
 } else {
   document.getElementById("navLoginButton").classList.remove("hidden");
   document.getElementById("loginButton").classList.remove("hidden");
@@ -114,4 +109,16 @@ document.getElementById("logoutButton").addEventListener("click", () => {
 
 document.getElementById("loginButton").addEventListener("click", () => {
   window.location.href = "/login/index.html";
+});
+
+document.getElementById("task-list-button").addEventListener("click", () => {
+  window.location.href = "/task/index.html";
+});
+
+document.getElementById("habit-list-button").addEventListener("click", () => {
+  window.location.href = "/habit/index.html";
+});
+
+document.getElementById("event-list-button").addEventListener("click", () => {
+  window.location.href = "/event/index.html";
 });
