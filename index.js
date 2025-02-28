@@ -24,8 +24,7 @@ if (user) {
     ).innerHTML = `Hello ${loggedInUser.name},<br> ${advice.slip.advice}`;
   };
 
-  // Aktivera senare för api anrop
-  //getAdvice();
+  getAdvice();
 
   document.getElementById("navLogoutButton").classList.remove("hidden");
   document.getElementById("navLink").classList.remove("hidden");
@@ -70,13 +69,21 @@ if (user) {
   }
   habitList.appendChild(ul);
 
+  let filteredEventList = loggedInUser.eventlist.filter((event) => {
+    if (new Date(event.end) > new Date()) return true;
+  });
+  sortedEventList = filteredEventList.sort(
+    (a, b) => new Date(a.start) - new Date(b.start)
+  );
   let eventList = document.getElementById("event-list");
   var ul = document.createElement("ul");
-  loggedInUser.eventlist.forEach((event) => {
-    var li = document.createElement("li");
-    li.innerHTML = `Event: ${event.name}, Start: ${event.start}, End: ${event.start}`;
-    ul.appendChild(li);
-  });
+  for (let i = 0; i < 3; i++) {
+    if (sortedEventList[i]) {
+      var li = document.createElement("li");
+      li.innerHTML = `Event: ${sortedEventList[i].name}, Start: ${sortedEventList[i].start}, End: ${sortedEventList[i].start}`;
+      ul.appendChild(li);
+    }
+  }
   eventList.appendChild(ul);
 } else {
   document.getElementById("navLoginButton").classList.remove("hidden");
