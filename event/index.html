@@ -4,14 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Productivity assistant</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-      }
-      .past-event {
-        color: gray;
-      }
-    </style>
     <link rel="stylesheet" href="style.css" />
     <script src="index.js" defer></script>
     <body>
@@ -61,35 +53,42 @@
           </div>
         </div>
       </header>
-      <div id="userLoggedIn" class="hidden">
-        <h1>Event Planner</h1>
+      <main>
+        <div id="userLoggedIn" class="hidden">
+          <h1>Event Planner</h1>
 
-        <form id="event-form">
-          <label for="event-name">Händelsenamn:</label>
-          <input type="text" id="event-name" required />
+          <form id="event-form">
+            <label for="event-name">Händelsenamn:</label>
+            <input type="text" id="event-name" required />
 
-          <label for="event-start">Starttid:</label>
-          <input type="datetime-local" id="event-start" required />
+            <label for="event-start">Starttid:</label>
+            <input type="datetime-local" id="event-start" required />
 
-          <label for="event-end">Sluttid:</label>
-          <input type="datetime-local" id="event-end" required />
+            <label for="event-end">Sluttid:</label>
+            <input type="datetime-local" id="event-end" required />
 
-          <button type="submit">Lägg till</button>
-        </form>
+            <button type="submit">Lägg till</button>
+          </form>
 
-        <label for="filter">Filtrera:</label>
-        <select id="filter">
-          <option value="all">Alla</option>
-          <option value="upcoming">Kommande</option>
-          <option value="past">Tidigare</option>
-        </select>
+          <label for="filter">Filtrera:</label>
+          <select id="filter">
+            <option value="all">Alla</option>
+            <option value="upcoming">Kommande</option>
+            <option value="past">Tidigare</option>
+          </select>
 
-        <h2>Kommande händelser</h2>
-        <ul id="event-list"></ul>
+          <h2>Kommande händelser</h2>
+          <ul id="event-list"></ul>
 
-        <h2>Tidigare händelser</h2>
-        <ul id="past-event-list"></ul>
-      </div>
+          <h2>Tidigare händelser</h2>
+          <ul id="past-event-list"></ul>
+        </div>
+      </main>
+      <footer>
+        <div class="footer-container">
+          <p>&copy; 2025 Productivity Assistant. All rights reserved.</p>
+        </div>
+      </footer>
     </body>
   </head>
 </html>

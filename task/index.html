@@ -4,14 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Productivity assistant</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-      }
-      .past-event {
-        color: gray;
-      }
-    </style>
     <link rel="stylesheet" href="style.css" />
     <script src="index.js" defer></script>
     <body>
@@ -61,47 +53,54 @@
           </div>
         </div>
       </header>
-      <div id="userLoggedIn" class="hidden">
-        <h1>Todo & Activities</h1>
-        <form id="todo-form">
-          <label for="todo-title">Titel:</label>
-          <input type="text" id="todo-title" required />
+      <main>
+        <div id="userLoggedIn" class="hidden">
+          <h1>Todo & Activities</h1>
+          <form id="todo-form">
+            <label for="todo-title">Titel:</label>
+            <input type="text" id="todo-title" required />
 
-          <label for="todo-description">Beskrivning:</label>
-          <input type="text" id="todo-description" required />
+            <label for="todo-description">Beskrivning:</label>
+            <input type="text" id="todo-description" required />
 
-          <label for="todo-time">Tidsestimat (min):</label>
-          <input type="number" id="todo-time" required />
+            <label for="todo-time">Tidsestimat (min):</label>
+            <input type="number" id="todo-time" required />
 
-          <label for="todo-category">Kategori:</label>
-          <select id="todo-category" required>
-            <option value="Hälsa">Hälsa</option>
-            <option value="Hushåll">Hushåll</option>
-            <option value="Jobb">Jobb</option>
-            <option value="Nöje">Nöje</option>
+            <label for="todo-category">Kategori:</label>
+            <select id="todo-category" required>
+              <option value="Hälsa">Hälsa</option>
+              <option value="Hushåll">Hushåll</option>
+              <option value="Jobb">Jobb</option>
+              <option value="Nöje">Nöje</option>
+            </select>
+
+            <label for="todo-deadline">Deadline:</label>
+            <input type="date" id="todo-deadline" required />
+
+            <button type="submit">Lägg till</button>
+          </form>
+
+          <label for="filter">Filtrera:</label>
+          <select id="filter">
+            <option value="all">Alla</option>
+            <option value="true">Slutförda</option>
+            <option value="false">Ej slutförda</option>
           </select>
 
-          <label for="todo-deadline">Deadline:</label>
-          <input type="date" id="todo-deadline" required />
+          <label for="sort">Sortera efter:</label>
+          <select id="sort">
+            <option value="deadline">Deadline</option>
+            <option value="timeEstimate">Tidsestimat</option>
+          </select>
 
-          <button type="submit">Lägg till</button>
-        </form>
-
-        <label for="filter">Filtrera:</label>
-        <select id="filter">
-          <option value="all">Alla</option>
-          <option value="true">Slutförda</option>
-          <option value="false">Ej slutförda</option>
-        </select>
-
-        <label for="sort">Sortera efter:</label>
-        <select id="sort">
-          <option value="deadline">Deadline</option>
-          <option value="timeEstimate">Tidsestimat</option>
-        </select>
-
-        <ul id="todo-list"></ul>
-      </div>
+          <ul id="todo-list"></ul>
+        </div>
+      </main>
+      <footer>
+        <div class="footer-container">
+          <p>&copy; 2025 Productivity Assistant. All rights reserved.</p>
+        </div>
+      </footer>
     </body>
   </head>
 </html>
