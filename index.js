@@ -50,7 +50,7 @@ if (user) {
       li.innerHTML = `${reversedFilteredTaskList[i].title}
         <br><br>Category: ${reversedFilteredTaskList[i].category}
         <br>Deadline: ${reversedFilteredTaskList[i].deadline} 
-        <br>( ${reversedFilteredTaskList[i].timeEstimate} min )`;
+        <br>Lasts: ${reversedFilteredTaskList[i].timeEstimate} min`;
       ul.appendChild(li);
     }
   }
@@ -64,7 +64,7 @@ if (user) {
   for (let i = 0; i < 3; i++) {
     if (sortedHabitList[i]) {
       var li = document.createElement("li");
-      li.innerHTML = `${sortedHabitList[i].title}<br><br>( Prioritet: ${sortedHabitList[i].priority} )<br>Reps: ${sortedHabitList[i].repetitions}`;
+      li.innerHTML = `${sortedHabitList[i].title}<br><br>Priority: ${sortedHabitList[i].priority}<br>Repetitions: ${sortedHabitList[i].repetitions}`;
       ul.appendChild(li);
     }
   }
@@ -81,7 +81,7 @@ if (user) {
   for (let i = 0; i < 3; i++) {
     if (sortedEventList[i]) {
       var li = document.createElement("li");
-      li.innerHTML = `Event: ${sortedEventList[i].name}<br><br>Start: ${sortedEventList[i].start}<br>End: ${sortedEventList[i].start}`;
+      li.innerHTML = `${sortedEventList[i].name}<br><br>Start: ${sortedEventList[i].start.replace("T"," ").replace(":00.000Z", "")}<br>End: ${sortedEventList[i].end.replace("T"," ").replace(":00.000Z", "")}`;
       ul.appendChild(li);
     }
   }

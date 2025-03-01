@@ -290,13 +290,15 @@ body {
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
-
+    h1 {
+      justify-self: center;
+    }
     .list-div {
-      background-color: lightslategrey;
+      background-color: hsla(205, 87%, 53%, 0.416);
       border-radius: 1rem;
       margin-bottom: 1rem;
 
-      h2  {
+      h2 {
         color: white;
         position: absolute;
         margin-top: 4px;
@@ -464,6 +466,15 @@ body {
 
     /* desktop view */
     .home {
+      .list-div {
+        ul {
+          display: flex;
+          li {
+            width: 210px;
+            margin: auto;
+          }
+        }
+      }
     }
 
     .event {
