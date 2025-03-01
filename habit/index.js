@@ -10,21 +10,6 @@ if (user) {
   document.querySelector("#userLoggedIn").classList.remove("hidden");
 
   document.addEventListener("DOMContentLoaded", () => {
-    /*     let habits = JSON.parse(localStorage.getItem(user));
-
-    if (!localStorage.getItem(habits)) {
-      habits.habitlist = [
-        { id: Date.now(), title: "Träning", repetitions: 0, priority: "hög" },
-        {
-          id: Date.now() + 1,
-          title: "Läsa bok",
-          repetitions: 0,
-          priority: "mellan",
-        },
-      ];
-      localStorage.setItem(user, JSON.stringify(habits));
-    } */
-
     loadHabits();
     setupFilters();
     setupSorting();
@@ -59,7 +44,6 @@ if (user) {
 
     let habits = JSON.parse(localStorage.getItem(user));
 
-    //let habits = JSON.parse(localStorage.getItem("habits")) || [];
     const newHabit = {
       id: Date.now(),
       title: habitTitle,
@@ -111,7 +95,6 @@ if (user) {
       .addEventListener("change", (e) => {
         const selectedPriority = e.target.value;
         let habits = JSON.parse(localStorage.getItem(user));
-        //let habits = JSON.parse(localStorage.getItem("habits")) || [];
         const filteredHabits =
           selectedPriority !== "alla"
             ? habits.habitlist.filter(
@@ -130,7 +113,6 @@ if (user) {
   function setupSorting() {
     document.getElementById("sortSelect").addEventListener("change", (e) => {
       const sortOption = e.target.value;
-      //let habits = JSON.parse(localStorage.getItem("habits")) || [];
       let habits = JSON.parse(localStorage.getItem(user));
 
       if (sortOption === "repetitions-asc") {
