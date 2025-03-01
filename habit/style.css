@@ -1,12 +1,283 @@
-body {
-  font-family: Arial, sans-serif;
-  max-width: 600px;
-  margin: auto;
-  padding: 1rem;
-  background-color: rgb(182, 182, 182);
-  text-align: center;
-  font-size: 20px;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
 }
+
+:root {
+  --bar-width: 60px;
+  --bar-height: 8px;
+  --hamburger-gap: 6px;
+  --foreground: #333;
+  --background: white;
+  --hamburger-margin: 8px;
+  --animation-timing: 200ms ease-in-out;
+  --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
+}
+
+.hamburger-menu {
+  --x-width: calc(var(--hamburger-height) * 1.41421356237);
+
+  display: flex;
+
+  flex-direction: column;
+  gap: var(--hamburger-gap);
+  width: max-content;
+
+  top: var(--hamburger-margin);
+  left: var(--hamburger-margin);
+  z-index: 2;
+}
+
+.hamburger-menu:has(input:focus-visible)::before,
+.hamburger-menu:has(input:focus-visible)::after,
+.hamburger-menu input:focus-visible {
+  border: 1px solid var(--background);
+  box-shadow: 0 0 0 1px var(--foreground);
+}
+
+.hamburger-menu::before,
+.hamburger-menu::after,
+.hamburger-menu input {
+  content: "";
+  width: var(--bar-width);
+  height: var(--bar-height);
+  background-color: var(--foreground);
+  border-radius: 9999px;
+  transform-origin: left center;
+  transition: opacity var(--animation-timing), with var(--animation-timing),
+    rotate var(--animation-timing), translate var(--animation-timing),
+    background-color var(--animation-timing);
+}
+
+.hamburger-menu input {
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  pointer-events: none;
+}
+
+.hamburger-menu:has(input:checked)::before {
+  rotate: 45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / -2);
+}
+
+.hamburger-menu:has(input:checked)::after {
+  rotate: -45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / 2);
+}
+
+.hamburger-menu input:checked {
+  opacity: 0;
+  width: 0;
+}
+
+.sidebar {
+  transition: translate var(--animation-timing);
+  translate: 100%;
+  padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem);
+  background-color: var(--foreground);
+  color: var(--background);
+  min-width: 140vw;
+  min-height: 100vh;
+  display: grid;
+  justify-content: center;
+  position: fixed;
+  margin-top: 5px;
+  margin-left: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+
+  .nav-link {
+    margin: 1rem;
+
+    a {
+      text-decoration: none;
+      color: white;
+      font-weight: 800;
+      display: grid;
+      justify-self: center;
+    }
+
+    a:hover {
+      color: gray;
+    }
+  }
+
+  .nav-button {
+    margin: 1rem;
+
+    button {
+      background-color: var(--foreground);
+      border: none;
+      text-decoration: none;
+      color: white;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    button:hover {
+      color: gray;
+    }
+  }
+}
+
+.hamburger-menu:has(input:checked) + .sidebar {
+  transform: translate(-180%, 0px);
+}
+
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  margin: 0px 0px 0px 0px;
+  width: 100%;
+  justify-items: center;
+
+  header {
+    justify-self: center;
+    max-width: 1280px;
+    width: 100%;
+
+    .row {
+      display: flex;
+      width: 100%;
+
+      .column1 {
+        width: 20%;
+        display: grid;
+        justify-content: start;
+        align-self: center;
+        padding: 1rem;
+
+        a {
+          text-decoration: none;
+
+          img {
+            width: 50px;
+          }
+        }
+      }
+
+      .column2 {
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+
+        a {
+          display: none;
+          padding: 1rem;
+          font-weight: 600;
+          color: black;
+          text-decoration: none;
+          transition: transform 0.15s;
+        }
+      }
+
+      .column3 {
+        width: 20%;
+        display: grid;
+        justify-content: end;
+        align-content: center;
+        padding: 1rem;
+
+        .login-logout-button {
+          display: none;
+
+          button {
+            appearance: none;
+            background-color: transparent;
+            border: 2px solid #1a1a1a;
+            border-radius: 12px;
+            box-sizing: border-box;
+            color: #3b3b3b;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: normal;
+            margin: 0;
+            min-height: 50px;
+            min-width: 0;
+            outline: none;
+            padding: 16px 24px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: 100%;
+            will-change: transform;
+          }
+
+          button:disabled {
+            pointer-events: none;
+          }
+
+          button:hover {
+            color: #fff;
+            background-color: #1a1a1a;
+            box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+            transform: translateY(-2px);
+          }
+
+          button:active {
+            box-shadow: none;
+            transform: translateY(0);
+          }
+        }
+      }
+    }
+  }
+  
+  footer {
+    background-color: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+
+
+  @media (width > 832px) {
+    header {
+      .row {
+        .column2 {
+          a {
+            display: initial;
+          }
+          a:hover {
+            color: gray;
+          }
+        }
+        .column3 {
+          .login-logout-button {
+            display: grid;
+          }
+
+          .header-hamburger-menu {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+
 
 form {
   display: flex;

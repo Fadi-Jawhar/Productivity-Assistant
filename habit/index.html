@@ -1,23 +1,96 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Habit Tracker</title>
-  <link rel="stylesheet" href="/habit/style.css">
-  <script src="index.js" defer></script>
-</head>
-<body>
-  <h1>Habits</h1>
-  <form id="habitForm">
-    <input type="text" id="habitTitle" placeholder="Lägg till ny habit..." required />
-    <select id="habitPriority">
-      <option value="låg">Låg</option>
-      <option value="mellan">Mellan</option>
-      <option value="hög">Hög</option>
-    </select>
-    <button type="submit">Lägg till</button>
-  </form>
-  <div id="habitsList"></div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="/habit/style.css" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="row">
+        <div class="column1">
+          <a href="/">
+            <img src="home.png" alt="home icon" />
+          </a>
+        </div>
+        <div class="column2">
+          <div id="addMenu" class="hidden">
+            <a href="/task/index.html">ToDo</a>
+            <a href="/habit/index.html">Habit</a>
+            <a href="/event/index.html">Event</a>
+          </div>
+        </div>
+        <div class="column3">
+          <div class="header-hamburger-menu">
+            <label class="hamburger-menu">
+              <input type="checkbox" />
+            </label>
+            <aside class="sidebar">
+              <nav>
+                <div id="navLink" class="hidden">
+                  <div class="nav-link">
+                    <a href="/task/index.html">ToDo</a>
+                  </div>
+                  <div class="nav-link">
+                    <a href="/habit/index.html">Habit</a>
+                  </div>
+                  <div class="nav-link">
+                    <a href="/event/index.html">Event</a>
+                  </div>
+                </div>
+                <div class="nav-button">
+                  <button id="navLoginButton" class="hidden">Login</button>
+                  <button id="navLogoutButton" class="hidden">Logout</button>
+                </div>
+              </nav>
+            </aside>
+          </div>
+          <div class="login-logout-button">
+            <button id="logoutButton" class="hidden">Logout</button>
+            <button id="loginButton" class="hidden">Login</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+    <div id="userLoggedIn" class="hidden">
+      <h1>Habits</h1>
+      <form id="habitForm">
+        <input
+          type="text"
+          id="habitTitle"
+          placeholder="Lägg till ny habit..."
+          required
+        />
+        <select id="habitPriority">
+          <option value="låg">Låg</option>
+          <option value="mellan">Mellan</option>
+          <option value="hög">Hög</option>
+        </select>
+        <button type="submit">Lägg till</button>
+      </form>
+      <div id="habitsList"></div>
+      <select id="priorityFilter">
+        <option value="alla">Alla Prioriteter</option>
+        <option value="hög">Hög</option>
+        <option value="mellan">Mellan</option>
+        <option value="låg">Låg</option>
+      </select>
+
+      <select id="sortSelect">
+        <option value="repetitions-asc">Repetitioner (stigande)</option>
+        <option value="repetitions-desc">Repetitioner (fallande)</option>
+        <option value="priority-asc">Prioritet (stigande)</option>
+        <option value="priority-desc">Prioritet (fallande)</option>
+      </select>
+    </div>
+  </main>
+    <footer>
+      <div class="footer-container">
+        <p>&copy; 2025 Productivity Assistant. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
 </html>
