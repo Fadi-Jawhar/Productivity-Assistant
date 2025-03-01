@@ -34,6 +34,7 @@ if (user) {
   document.getElementById("task-list-button").classList.remove("hidden");
   document.getElementById("habit-list-button").classList.remove("hidden");
   document.getElementById("event-list-button").classList.remove("hidden");
+  document.getElementById("lists").classList.remove("hidden");
 
   let loggedInUser = JSON.parse(localStorage.getItem(user));
 

@@ -140,8 +140,10 @@ body {
   font-size: 16px;
   margin: 0px 0px 0px 0px;
   width: 100%;
-  display: grid;
-  justify-items: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   button {
     appearance: none;
@@ -290,9 +292,9 @@ body {
     padding-right: 1rem;
 
     .list-div {
-      padding-bottom: 1rem;
       background-color: lightslategrey;
       border-radius: 1rem;
+      margin-bottom: 1rem;
 
       ul {
         padding: 2rem;
@@ -306,9 +308,8 @@ body {
           margin-bottom: 1rem;
         }
       }
-      .button-div{
+      .button-div {
         padding: 1rem;
-        
       }
     }
   }
@@ -419,9 +420,7 @@ body {
     text-align: center;
     border-top: 1px solid #ddd;
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    margin-top: auto;
   }
 
   .hidden {
