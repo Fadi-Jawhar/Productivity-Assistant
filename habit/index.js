@@ -1,26 +1,45 @@
-document.addEventListener("DOMContentLoaded", () => {
-  if (!localStorage.getItem("habits")) {
-    const initialHabits = [
-      { id: Date.now(), title: "Träning", repetitions: 0, priority: "hög" },
-      { id: Date.now() + 1, title: "Läsa bok", repetitions: 0, priority: "mellan" }
-    ];
-    localStorage.setItem("habits", JSON.stringify(initialHabits));
-  }
+let user = JSON.parse(sessionStorage.getItem("user"));
 
-  loadHabits();
-  setupFilters();
-  setupSorting();
-});
+if (user) {
+  document.querySelector("#navLogoutButton").classList.remove("hidden");
+  document.querySelector("#navLink").classList.remove("hidden");
+  document.querySelector("#loginButton").classList.add("hidden");
+  document.querySelector("#logoutButton").classList.remove("hidden");
+  document.querySelector("#addMenu").classList.remove("hidden");
 
-function loadHabits(habits = null) {
-  const habitsList = document.getElementById("habitsList");
-  habitsList.innerHTML = "";
-  habits = habits || JSON.parse(localStorage.getItem("habits")) || [];
+  document.querySelector("#userLoggedIn").classList.remove("hidden");
 
-  habits.forEach(habit => {
-    const habitDiv = document.createElement("div");
-    habitDiv.classList.add("habit");
-    habitDiv.innerHTML = `
+  document.addEventListener("DOMContentLoaded", () => {
+    /*     let habits = JSON.parse(localStorage.getItem(user));
+
+    if (!localStorage.getItem(habits)) {
+      habits.habitlist = [
+        { id: Date.now(), title: "Träning", repetitions: 0, priority: "hög" },
+        {
+          id: Date.now() + 1,
+          title: "Läsa bok",
+          repetitions: 0,
+          priority: "mellan",
+        },
+      ];
+      localStorage.setItem(user, JSON.stringify(habits));
+    } */
+
+    loadHabits();
+    setupFilters();
+    setupSorting();
+  });
+
+  function loadHabits(habits = null) {
+    const habitsList = document.getElementById("habitsList");
+    habitsList.innerHTML = "";
+    let userHabits = JSON.parse(localStorage.getItem(user));
+    habits = habits || userHabits.habitlist || [];
+
+    habits.forEach((habit) => {
+      const habitDiv = document.createElement("div");
+      habitDiv.classList.add("habit");
+      habitDiv.innerHTML = `
       <span>${habit.title} (Prioritet: ${habit.priority}) - Reps: ${habit.repetitions}</span>
       <div class="habit-buttons">
         <button onclick="incrementHabit(${habit.id})">+1</button>
@@ -29,88 +48,126 @@ function loadHabits(habits = null) {
         <button onclick="deleteHabit(${habit.id})">❌</button>
       </div>
     `;
-    habitsList.appendChild(habitDiv);
+      habitsList.appendChild(habitDiv);
+    });
+  }
+
+  document.getElementById("habitForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const habitTitle = document.getElementById("habitTitle").value;
+    const habitPriority = document.getElementById("habitPriority").value;
+
+    let habits = JSON.parse(localStorage.getItem(user));
+
+    //let habits = JSON.parse(localStorage.getItem("habits")) || [];
+    const newHabit = {
+      id: Date.now(),
+      title: habitTitle,
+      repetitions: 0,
+      priority: habitPriority,
+    };
+
+    habits.habitlist.push(newHabit);
+    localStorage.setItem(user, JSON.stringify(habits));
+    document.getElementById("habitTitle").value = "";
+    loadHabits();
   });
-}
 
-document.getElementById("habitForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const habitTitle = document.getElementById("habitTitle").value;
-  const habitPriority = document.getElementById("habitPriority").value;
+  function incrementHabit(id) {
+    updateHabit(id, (habit) => habit.repetitions++);
+  }
 
-  let habits = JSON.parse(localStorage.getItem("habits")) || [];
-  const newHabit = {
-    id: Date.now(),
-    title: habitTitle,
-    repetitions: 0,
-    priority: habitPriority
-  };
+  function decrementHabit(id) {
+    updateHabit(id, (habit) => {
+      if (habit.repetitions > 0) habit.repetitions--;
+    });
+  }
 
-  habits.push(newHabit);
-  localStorage.setItem("habits", JSON.stringify(habits));
-  document.getElementById("habitTitle").value = "";
-  loadHabits();
-});
+  function resetHabit(id) {
+    updateHabit(id, (habit) => (habit.repetitions = 0));
+  }
 
-function incrementHabit(id) {
-  updateHabit(id, habit => habit.repetitions++);
-}
+  function deleteHabit(id) {
+    let habits = JSON.parse(localStorage.getItem(user));
+    //let habits = JSON.parse(localStorage.getItem("habits"));
+    habits.habitlist = habits.habitlist.filter((habit) => habit.id !== id);
+    localStorage.setItem(user, JSON.stringify(habits));
+    loadHabits();
+  }
 
-function decrementHabit(id) {
-  updateHabit(id, habit => {
-    if (habit.repetitions > 0) habit.repetitions--;
+  function updateHabit(id, callback) {
+    let habits = JSON.parse(localStorage.getItem(user));
+    habits.habitlist = habits.habitlist.map((habit) => {
+      if (habit.id === id) callback(habit);
+      return habit;
+    });
+    localStorage.setItem(user, JSON.stringify(habits));
+    loadHabits();
+  }
+
+  function setupFilters() {
+    document
+      .getElementById("priorityFilter")
+      .addEventListener("change", (e) => {
+        const selectedPriority = e.target.value;
+        let habits = JSON.parse(localStorage.getItem(user));
+        //let habits = JSON.parse(localStorage.getItem("habits")) || [];
+        const filteredHabits =
+          selectedPriority !== "alla"
+            ? habits.habitlist.filter(
+                (habit) => habit.priority === selectedPriority
+              )
+            : habits.habitlist;
+        console.log(
+          habits.habitlist.filter(
+            (habit) => habit.priority === selectedPriority
+          )
+        );
+        loadHabits(filteredHabits);
+      });
+  }
+
+  function setupSorting() {
+    document.getElementById("sortSelect").addEventListener("change", (e) => {
+      const sortOption = e.target.value;
+      //let habits = JSON.parse(localStorage.getItem("habits")) || [];
+      let habits = JSON.parse(localStorage.getItem(user));
+
+      if (sortOption === "repetitions-asc") {
+        habits.habitlist.sort((a, b) => a.repetitions - b.repetitions);
+      } else if (sortOption === "repetitions-desc") {
+        habits.habitlist.sort((a, b) => b.repetitions - a.repetitions);
+      } else if (sortOption === "priority-asc") {
+        const priorityOrder = { hög: 1, mellan: 2, låg: 3 };
+        habits.habitlist.sort(
+          (a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]
+        );
+      } else if (sortOption === "priority-desc") {
+        const priorityOrder = { hög: 1, mellan: 2, låg: 3 };
+        habits.habitlist.sort(
+          (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
+        );
+      }
+
+      loadHabits(habits.habitlist);
+    });
+  }
+
+  document.querySelector("#navLogoutButton").addEventListener("click", () => {
+    sessionStorage.removeItem("user");
+    window.location.href = "/index.html";
   });
-}
 
-function resetHabit(id) {
-  updateHabit(id, habit => habit.repetitions = 0);
-}
-
-function deleteHabit(id) {
-  let habits = JSON.parse(localStorage.getItem("habits"));
-  habits = habits.filter(habit => habit.id !== id);
-  localStorage.setItem("habits", JSON.stringify(habits));
-  loadHabits();
-}
-
-function updateHabit(id, callback) {
-  let habits = JSON.parse(localStorage.getItem("habits"));
-  habits = habits.map(habit => {
-    if (habit.id === id) callback(habit);
-    return habit;
+  document.querySelector("#navLoginButton").addEventListener("click", () => {
+    window.location.href = "/login/index.html";
   });
-  localStorage.setItem("habits", JSON.stringify(habits));
-  loadHabits();
-}
 
-function setupFilters() {
-  document.getElementById("priorityFilter").addEventListener("change", (e) => {
-    const selectedPriority = e.target.value;
-    let habits = JSON.parse(localStorage.getItem("habits")) || [];
-    const filteredHabits = selectedPriority !== "alla"
-      ? habits.filter(habit => habit.priority === selectedPriority)
-      : habits;
-    loadHabits(filteredHabits);
+  document.querySelector("#logoutButton").addEventListener("click", () => {
+    sessionStorage.removeItem("user");
+    window.location.href = "/index.html";
   });
-}
 
-function setupSorting() {
-  document.getElementById("sortSelect").addEventListener("change", (e) => {
-    const sortOption = e.target.value;
-    let habits = JSON.parse(localStorage.getItem("habits")) || [];
-
-    if (sortOption === "repetitions-asc") {
-      habits.sort((a, b) => a.repetitions - b.repetitions);
-    } else if (sortOption === "repetitions-desc") {
-      habits.sort((a, b) => b.repetitions - a.repetitions);
-    } else if (sortOption === "priority-asc") {
-      const priorityOrder = { "hög": 1, "mellan": 2, "låg": 3 };
-      habits.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
-    } else if (sortOption === "priority-desc") {
-      const priorityOrder = { "hög": 1, "mellan": 2, "låg": 3 };
-      habits.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);
-    }
-
-    loadHabits(habits);
+  document.querySelector("#loginButton").addEventListener("click", () => {
+    window.location.href = "/login/index.html";
   });
 }
