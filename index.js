@@ -46,9 +46,9 @@ if (user) {
   for (let i = 0; i < 3; i++) {
     if (reversedFilteredTaskList[i]) {
       var li = document.createElement("li");
-      li.innerHTML = `Title: ${reversedFilteredTaskList[i].title}
-        , Category: ${reversedFilteredTaskList[i].category}
-        , Deadline: ${reversedFilteredTaskList[i].deadline} 
+      li.innerHTML = `${reversedFilteredTaskList[i].title}
+        <br>Category: ${reversedFilteredTaskList[i].category}
+        <br>Deadline: ${reversedFilteredTaskList[i].deadline} 
         (${reversedFilteredTaskList[i].timeEstimate} min)`;
       ul.appendChild(li);
     }
@@ -63,7 +63,7 @@ if (user) {
   for (let i = 0; i < 3; i++) {
     if (sortedHabitList[i]) {
       var li = document.createElement("li");
-      li.innerHTML = `${sortedHabitList[i].title} (Prioritet: ${sortedHabitList[i].priority}) - Reps: ${sortedHabitList[i].repetitions}`;
+      li.innerHTML = `${sortedHabitList[i].title} (Prioritet: ${sortedHabitList[i].priority})<br>Reps: ${sortedHabitList[i].repetitions}`;
       ul.appendChild(li);
     }
   }
@@ -80,7 +80,7 @@ if (user) {
   for (let i = 0; i < 3; i++) {
     if (sortedEventList[i]) {
       var li = document.createElement("li");
-      li.innerHTML = `Event: ${sortedEventList[i].name}, Start: ${sortedEventList[i].start}, End: ${sortedEventList[i].start}`;
+      li.innerHTML = `Event: ${sortedEventList[i].name}<br>Start: ${sortedEventList[i].start}, End: ${sortedEventList[i].start}`;
       ul.appendChild(li);
     }
   }

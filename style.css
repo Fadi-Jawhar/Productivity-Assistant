@@ -284,6 +284,26 @@ body {
 
   /* mobile view */
   .home {
+    max-width: 832px;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    ul {
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.384);
+      border-radius: 1rem;
+      li {
+        padding: 1rem;
+        background-color: var(--foreground);
+        color: white;
+        border-radius: 1rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    button {
+      margin-bottom: 2rem;
+    }
   }
 
   .event {
@@ -293,6 +313,12 @@ body {
   }
 
   .task {
+    button {
+      font-weight: 600;
+      height: 50px;
+      font-size: 1rem;
+      width: 200px;
+    }
   }
   /* ---------------- */
 
