@@ -288,21 +288,28 @@ body {
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
-    ul {
-      padding: 1rem;
-      background-color: rgba(0, 0, 0, 0.384);
-      border-radius: 1rem;
-      li {
-        padding: 1rem;
-        background-color: var(--foreground);
-        color: white;
-        border-radius: 1rem;
-        margin-bottom: 1rem;
-      }
-    }
 
-    button {
-      margin-bottom: 2rem;
+    .list-div {
+      padding-bottom: 1rem;
+      background-color: lightslategrey;
+      border-radius: 1rem;
+
+      ul {
+        padding: 2rem;
+        background-color: rgba(0, 0, 0, 0.384);
+        border-radius: 1rem;
+        li {
+          padding: 1rem;
+          background-color: var(--foreground);
+          color: white;
+          border-radius: 1rem;
+          margin-bottom: 1rem;
+        }
+      }
+      .button-div{
+        padding: 1rem;
+        
+      }
     }
   }
 
