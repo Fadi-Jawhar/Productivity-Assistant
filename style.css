@@ -385,15 +385,220 @@ header .column3 .login-logout-button button {
 .task {
   max-width: 832px;
   width: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: var(--spacing-md);
 }
 
-.task button {
+.task h1 {
+  color: var(--primary-dark);
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-xxl);
+}
+
+.task #todo-form {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+.task #todo-form label {
+  color: var(--primary-dark);
   font-weight: 600;
-  height: 50px;
-  font-size: 1rem;
-  width: 200px;
+  margin-bottom: var(--spacing-xs);
+  display: block;
+}
+
+.task #todo-form input,
+.task #todo-form select {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius-md);
+  background-color: var(--light-gray);
+  color: var(--foreground);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  transition: all 0.3s ease;
+}
+
+.task #todo-form input:focus,
+.task #todo-form select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.2);
+}
+
+.task #todo-form button {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 600;
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.task #todo-form button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.task .filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  background-color: white;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.task .filter-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 200px;
+}
+
+.task .filter-group label {
+  color: var(--primary-dark);
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.task .filter-group select {
+  padding: var(--spacing-sm);
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius-md);
+  background-color: var(--light-gray);
+  color: var(--foreground);
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.task .filter-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.2);
+}
+
+.task #todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task #todo-list li {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--primary);
+  transition: all 0.3s ease;
+}
+
+.task #todo-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.task #todo-list .todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.task #todo-list .todo-title {
+  font-size: var(--font-size-large);
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin: 0;
+}
+
+.task #todo-list .todo-category {
+  background-color: var(--primary-light);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+}
+
+.task #todo-list .todo-description {
+  margin-bottom: var(--spacing-md);
+  color: var(--dark-gray);
+}
+
+.task #todo-list .todo-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  font-size: var(--font-size-small);
+  color: var(--dark-gray);
+}
+
+.task #todo-list .todo-meta span {
+  display: flex;
+  align-items: center;
+}
+
+.task #todo-list .todo-meta .deadline {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.task #todo-list .todo-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.task #todo-list .todo-actions button {
+  flex: 1;
+  min-height: 40px;
+  padding: var(--spacing-sm);
+}
+
+.task #todo-list .todo-actions .complete-btn {
+  background-color: var(--success);
+  border-color: var(--success);
+  color: white;
+}
+
+.task #todo-list .todo-actions .delete-btn {
+  background-color: white;
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.task #todo-list .todo-actions .complete-btn:hover {
+  background-color: #3d8b40;
+}
+
+.task #todo-list .todo-actions .delete-btn:hover {
+  background-color: var(--danger);
+  color: white;
+}
+
+.task #todo-list .completed {
+  border-left-color: var(--success);
+  opacity: 0.8;
+}
+
+.task #todo-list .completed .todo-title {
+  text-decoration: line-through;
+  color: var(--dark-gray);
 }
 
 /* Habit section */
@@ -509,6 +714,21 @@ ul {
     flex: 1;
     min-width: 200px;
     margin: 0;
+  }
+  
+  /* Task desktop view */
+  .task #todo-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .task #todo-form button {
+    grid-column: span 2;
+    width: 50%;
+    justify-self: center;
+  }
+  
+  .task .filter-container {
+    flex-direction: row;
   }
 
   /* Register and Login forms */
