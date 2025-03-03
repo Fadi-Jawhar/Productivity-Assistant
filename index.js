@@ -34,6 +34,7 @@ if (user) {
   document.getElementById("task-list-button").classList.remove("hidden");
   document.getElementById("habit-list-button").classList.remove("hidden");
   document.getElementById("event-list-button").classList.remove("hidden");
+  document.getElementById("lists").classList.remove("hidden");
 
   let loggedInUser = JSON.parse(localStorage.getItem(user));
 
@@ -46,10 +47,10 @@ if (user) {
   for (let i = 0; i < 3; i++) {
     if (reversedFilteredTaskList[i]) {
       var li = document.createElement("li");
-      li.innerHTML = `Title: ${reversedFilteredTaskList[i].title}
-        , Category: ${reversedFilteredTaskList[i].category}
-        , Deadline: ${reversedFilteredTaskList[i].deadline} 
-        (${reversedFilteredTaskList[i].timeEstimate} min)`;
+      li.innerHTML = `${reversedFilteredTaskList[i].title}
+        <br><br>Category: ${reversedFilteredTaskList[i].category}
+        <br>Deadline: ${reversedFilteredTaskList[i].deadline} 
+        <br>Lasts: ${reversedFilteredTaskList[i].timeEstimate} min`;
       ul.appendChild(li);
     }
   }
@@ -63,7 +64,7 @@ if (user) {
   for (let i = 0; i < 3; i++) {
     if (sortedHabitList[i]) {
       var li = document.createElement("li");
-      li.innerHTML = `${sortedHabitList[i].title} (Prioritet: ${sortedHabitList[i].priority}) - Reps: ${sortedHabitList[i].repetitions}`;
+      li.innerHTML = `${sortedHabitList[i].title}<br><br>Priority: ${sortedHabitList[i].priority}<br>Repetitions: ${sortedHabitList[i].repetitions}`;
       ul.appendChild(li);
     }
   }
@@ -80,7 +81,7 @@ if (user) {
   for (let i = 0; i < 3; i++) {
     if (sortedEventList[i]) {
       var li = document.createElement("li");
-      li.innerHTML = `Event: ${sortedEventList[i].name}, Start: ${sortedEventList[i].start}, End: ${sortedEventList[i].start}`;
+      li.innerHTML = `${sortedEventList[i].name}<br><br>Start: ${sortedEventList[i].start.replace("T"," ").replace(":00.000Z", "")}<br>End: ${sortedEventList[i].end.replace("T"," ").replace(":00.000Z", "")}`;
       ul.appendChild(li);
     }
   }
@@ -90,7 +91,7 @@ if (user) {
   document.getElementById("loginButton").classList.remove("hidden");
   document.getElementById(
     "welcomeMessage"
-  ).innerHTML = `Hello, please <a href='/login/index.html'>login</a>.`;
+  ).innerHTML = `Welcome to your Productivity Assistant. <br> <a href='/login/index.html'>Login</a>.`;
 }
 
 document.getElementById("navLogoutButton").addEventListener("click", () => {
