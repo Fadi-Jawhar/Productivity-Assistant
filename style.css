@@ -942,7 +942,7 @@ header .column3 .login-logout-button button {
   border-bottom: 2px solid var(--primary-light);
 }
 
-.event .event-list {
+.event #event-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -966,6 +966,14 @@ header .column3 .login-logout-button button {
   box-shadow: var(--shadow-sm);
   border-left: 4px solid var(--primary);
   transition: all 0.3s ease;
+}
+
+.event #event-list,
+.event #past-event-list {
+  width: 100%;
+  max-width: 832px; 
+  margin: 0 auto; 
+  padding: 0;
 }
 
 .event .event-list li:hover {
