@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const end = new Date(document.querySelector("#event-end").value);
 
         if (start >= end) {
-            alert("Starttiden måste vara före sluttiden!");
+            alert("The start time must be before the end time!");
             return;
         }
 
@@ -54,14 +54,14 @@ document.addEventListener("DOMContentLoaded", function () {
             eventItem.textContent = `${event.name} (${new Date(event.start).toLocaleString()} - ${new Date(event.end).toLocaleString()})`;
             
             const deleteBtn = document.createElement("button");
-            deleteBtn.textContent = "Ta bort";
+            deleteBtn.textContent = "Remove";
             deleteBtn.onclick = () => {
                 events.eventlist = events.eventlist.filter(e => e.id !== event.id);
                 saveEvent();
             };
 
             const editBtn = document.createElement("button");
-            editBtn.textContent = "Redigera";
+            editBtn.textContent = "Edit";
             editBtn.onclick = () => editEvent(event);
 
             eventItem.appendChild(editBtn);

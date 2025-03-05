@@ -58,29 +58,29 @@
           <h1>Event Planner</h1>
 
           <form id="event-form">
-            <label for="event-name">Händelsenamn:</label>
+            <label for="event-name">Event name:</label>
             <input type="text" id="event-name" required />
 
-            <label for="event-start">Starttid:</label>
+            <label for="event-start">Start time:</label>
             <input type="datetime-local" id="event-start" required />
 
-            <label for="event-end">Sluttid:</label>
+            <label for="event-end">End time:</label>
             <input type="datetime-local" id="event-end" required />
 
-            <button type="submit">Lägg till</button>
+            <button type="submit">Add event</button>
           </form>
 
-          <label for="filter">Filtrera:</label>
+          <label for="filter">Filter:</label>
           <select id="filter">
-            <option value="all">Alla</option>
-            <option value="upcoming">Kommande</option>
-            <option value="past">Tidigare</option>
+            <option value="all">All</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="past">Past</option>
           </select>
 
-          <h2>Kommande händelser</h2>
+          <h2>Upcoming events</h2>
           <ul id="event-list"></ul>
 
-          <h2>Tidigare händelser</h2>
+          <h2>Past events</h2>
           <ul id="past-event-list"></ul>
         </div>
       </main>
