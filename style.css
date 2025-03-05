@@ -719,16 +719,33 @@ header .column3 .login-logout-button button {
   margin-top: var(--spacing-lg);
 }
 
-.habit #habitsList {
-  background-color: white;
-  border-radius: var(--border-radius-lg);
-  margin-bottom: var(--spacing-md);
-  padding: var(--spacing-lg);
-  box-shadow: var(--shadow-sm);
-  border-left: 4px solid var(--primary);
-  transition: all 0.3s ease;
+
+
+#habitsList {
+  display: flex;
+  flex-direction: column;
   margin-top: 20px;
 }
+
+#habitsList > div {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  
+}
+
+#habitsList > div:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
 
 .habit .habit-item:hover {
   transform: translateY(-2px);
