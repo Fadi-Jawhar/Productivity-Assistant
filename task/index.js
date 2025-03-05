@@ -64,21 +64,21 @@ document.querySelector("#addMenu").classList.remove("hidden");
             todoItem.innerHTML = `${todo.title} - ${todo.category} - ${todo.deadline} (${todo.timeEstimate} min)`;
             
             const toggleBtn = document.createElement("button");
-            toggleBtn.textContent = todo.completed ? "Markera som ej slutförd" : "Markera som slutförd";
+            toggleBtn.textContent = todo.completed ? "Mark as incomplete" : "Mark as completed";
             toggleBtn.onclick = () => {
                 todo.completed = !todo.completed;
                 saveTodos();
             };
             
             const deleteBtn = document.createElement("button");
-            deleteBtn.textContent = "Ta bort";
+            deleteBtn.textContent = "Remove";
             deleteBtn.onclick = () => {
                 todos.tasklist = todos.tasklist.filter(t => t.id !== todo.id);
                 saveTodos();
             };
             
             const editBtn = document.createElement("button");
-            editBtn.textContent = "Redigera";
+            editBtn.textContent = "Edit";
             editBtn.onclick = () => editTodo(todo);
 
             todoItem.appendChild(toggleBtn);
