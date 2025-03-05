@@ -96,7 +96,7 @@ if (user) {
         const selectedPriority = e.target.value;
         let habits = JSON.parse(localStorage.getItem(user));
         const filteredHabits =
-          selectedPriority !== "alla"
+          selectedPriority !== "all"
             ? habits.habitlist.filter(
                 (habit) => habit.priority === selectedPriority
               )
@@ -120,12 +120,12 @@ if (user) {
       } else if (sortOption === "repetitions-desc") {
         habits.habitlist.sort((a, b) => b.repetitions - a.repetitions);
       } else if (sortOption === "priority-asc") {
-        const priorityOrder = { hög: 1, mellan: 2, låg: 3 };
+        const priorityOrder = { high: 1, medium: 2, low: 3 };
         habits.habitlist.sort(
           (a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]
         );
       } else if (sortOption === "priority-desc") {
-        const priorityOrder = { hög: 1, mellan: 2, låg: 3 };
+        const priorityOrder = { high: 1, medium: 2, low: 3 };
         habits.habitlist.sort(
           (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
         );

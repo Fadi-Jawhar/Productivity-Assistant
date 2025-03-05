@@ -61,27 +61,27 @@
           <input
             type="text"
             id="habitTitle"
-            placeholder="Lägg till ny habit..."
+            placeholder="Add new habit..."
             required
           />
           <select id="habitPriority">
-            <option value="låg">Låg</option>
-            <option value="mellan">Mellan</option>
-            <option value="hög">Hög</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
           </select>
-          <button type="submit">Lägg till</button>
+          <button type="submit">Add habit</button>
         </form>
         <select id="priorityFilter">
-          <option value="alla">Alla Prioriteter</option>
-          <option value="hög">Hög</option>
-          <option value="mellan">Mellan</option>
-          <option value="låg">Låg</option>
+          <option value="all">All Priorities</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
         </select>
         <select id="sortSelect">
-          <option value="repetitions-asc">Repetitioner (stigande)</option>
-          <option value="repetitions-desc">Repetitioner (fallande)</option>
-          <option value="priority-asc">Prioritet (stigande)</option>
-          <option value="priority-desc">Prioritet (fallande)</option>
+          <option value="repetitions-asc">Repetitions (ascending)</option>
+          <option value="repetitions-desc">Repetitions (descending)</option>
+          <option value="priority-asc">Priority (ascending)</option>
+          <option value="priority-desc">Priority (descending)</option>
         </select>
         <h2>Habits</h2>
         <div id="habitsList"></div>
