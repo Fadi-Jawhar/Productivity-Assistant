@@ -44,54 +44,57 @@ document.querySelector("#addMenu").classList.remove("hidden");
     }
 
     function renderTodos() {
-        todoList.innerHTML = "";
-        
-        let filteredTodos = todos.tasklist.filter(todo => {
-            if (filterSelect.value === "all") return true;
-            return filterSelect.value === "true" ? todo.completed : !todo.completed;
-        });
-        
-        filteredTodos.sort((a, b) => {
-            if (sortSelect.value === "deadline") {
-                return new Date(a.deadline) - new Date(b.deadline);
-            } else if (sortSelect.value === "timeEstimate") {
-                return a.timeEstimate - b.timeEstimate;
-            }
-        });
+    todoList.innerHTML = "";
+    
+    let filteredTodos = todos.tasklist.filter(todo => {
+        if (filterSelect.value === "all") return true;
+        return filterSelect.value === "true" ? todo.completed : !todo.completed;
+    });
 
-        filteredTodos.forEach(todo => {
-            const todoItem = document.createElement("li");
-            todoItem.innerHTML = `${todo.title} - ${todo.category} - ${todo.deadline} (${todo.timeEstimate} min)`;
-            
-            const toggleBtn = document.createElement("button");
-            toggleBtn.textContent = todo.completed ? "Mark as incomplete" : "Mark as completed";
-            toggleBtn.onclick = () => {
-                todo.completed = !todo.completed;
-                saveTodos();
-            };
-            
-            const deleteBtn = document.createElement("button");
-            deleteBtn.textContent = "Remove";
-            deleteBtn.onclick = () => {
-                todos.tasklist = todos.tasklist.filter(t => t.id !== todo.id);
-                saveTodos();
-            };
-            
-            const editBtn = document.createElement("button");
-            editBtn.textContent = "Edit";
-            editBtn.onclick = () => editTodo(todo);
+    filteredTodos.sort((a, b) => {
+        if (sortSelect.value === "deadline") {
+            return new Date(a.deadline) - new Date(b.deadline);
+        } else if (sortSelect.value === "timeEstimate") {
+            return a.timeEstimate - b.timeEstimate;
+        }
+    });
 
-            todoItem.appendChild(toggleBtn);
-            todoItem.appendChild(editBtn);
-            todoItem.appendChild(deleteBtn);
+    filteredTodos.forEach(todo => {
+        const todoItem = document.createElement("li");
 
-            if (todo.completed) {
-                todoItem.style.textDecoration = "line-through";
-            }
+        const todoText = document.createElement("span");
+        todoText.textContent = `${todo.title} - ${todo.category} - ${todo.deadline} (${todo.timeEstimate} min)`;
 
-            todoList.appendChild(todoItem);
-        });
-    }
+        if (todo.completed) {
+            todoText.classList.add("completed");
+        }
+
+        const toggleBtn = document.createElement("button");
+        toggleBtn.textContent = todo.completed ? "Mark as incomplete" : "Mark as complete";
+        toggleBtn.onclick = () => {
+            todo.completed = !todo.completed;
+            saveTodos();
+        };
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Remove";
+        deleteBtn.onclick = () => {
+            todos.tasklist = todos.tasklist.filter(t => t.id !== todo.id);
+            saveTodos();
+        };
+
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.onclick = () => editTodo(todo);
+
+        todoItem.appendChild(todoText);
+        todoItem.appendChild(toggleBtn);
+        todoItem.appendChild(editBtn);
+        todoItem.appendChild(deleteBtn);
+
+        todoList.appendChild(todoItem);
+    });
+}
 
     function editTodo(todo) {
         document.querySelector("#todo-title").value = todo.title;
