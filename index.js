@@ -91,7 +91,7 @@ if (user) {
   document.getElementById("loginButton").classList.remove("hidden");
   document.getElementById(
     "welcomeMessage"
-  ).innerHTML = `Welcome to your Productivity Assistant. <br> <a href='/login/index.html'>Login</a>.`;
+  ).innerHTML = `Welcome to your Productivity Assistant! 🚀 <br> To access your todos, habits, and events, please <a href='/login/index.html'>Login</a>.`;
 }
 
 document.getElementById("navLogoutButton").addEventListener("click", () => {
