@@ -1,13 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Productivity assistant</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="index.js" defer></script>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <header>
+      <div class="row">
+        <div class="column1">
+          <a href="/">
+            <img src="/home.png" alt="home icon" />
+          </a>
+        </div>
+        <div class="column2">
+          <div id="addMenu" class="hidden">
+            <a href="/task/index.html">Todo</a>
+            <a href="/habit/index.html">Habit</a>
+            <a href="/event/index.html">Event</a>
+          </div>
+        </div>
+        <div class="column3">
+          <div class="header-hamburger-menu">
+            <label class="hamburger-menu">
+              <input id="hamburger" type="checkbox" />
+            </label>
+            <aside class="sidebar">
+              <nav>
+                <div id="navLink" class="hidden">
+                  <div class="nav-link">
+                    <a href="/task/index.html">ToDo</a>
+                  </div>
+                  <div class="nav-link">
+                    <a href="/habit/index.html">Habit</a>
+                  </div>
+                  <div class="nav-link">
+                    <a href="/event/index.html">Event</a>
+                  </div>
+                </div>
+                <div class="nav-button">
+                  <button id="navLoginButton" class="hidden">Login</button>
+                  <button id="navLogoutButton" class="hidden">Logout</button>
+                </div>
+              </nav>
+            </aside>
+          </div>
+          <div class="login-logout-button">
+            <button id="logoutButton" class="hidden">Logout</button>
+            <button id="loginButton" class="hidden">Login</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="home">
+      <h1 id="welcomeMessage">Hello</h1>
+      <div id="lists" class="hidden">
+        <div class="list-div">
+          <h2>Todos</h2>
+          <div id="task-list"></div>
+          <div class="button-div">
+            <button id="task-list-button" class="hidden">
+              Todos & Activities
+            </button>
+          </div>
+        </div>
+        <div class="list-div">
+          <h2>Habits</h2>
+          <div id="habit-list"></div>
+          <div class="button-div">
+            <button id="habit-list-button" class="hidden">Habits</button>
+          </div>
+        </div>
+        <div class="list-div">
+          <h2>Events</h2>
+          <div id="event-list"></div>
+          <div class="button-div">
+            <button id="event-list-button" class="hidden">Event planner</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <p>&copy; 2025 Productivity Assistant. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
 </html>

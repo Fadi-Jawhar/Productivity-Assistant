@@ -1,15 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Productivity assistant</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css" />
     <script src="index.js" defer></script>
-</head>
-<body>
-    <div class="tasklist">
+    <body>
+      <header>
+        <div class="row">
+          <div class="column1">
+            <a href="/">
+              <img src="home.png" alt="home icon" />
+            </a>
+          </div>
+          <div class="column2">
+            <div id="addMenu" class="hidden">
+              <a href="/task/index.html">Todo</a>
+              <a href="/habit/index.html">Habit</a>
+              <a href="/event/index.html">Event</a>
+            </div>
+          </div>
+          <div class="column3">
+            <div class="header-hamburger-menu">
+              <label class="hamburger-menu">
+                <input id="hamburger" type="checkbox" />
+              </label>
+              <aside class="sidebar">
+                <nav>
+                  <div id="navLink" class="hidden">
+                    <div class="nav-link">
+                      <a href="/task/index.html">ToDo</a>
+                    </div>
+                    <div class="nav-link">
+                      <a href="/habit/index.html">Habit</a>
+                    </div>
+                    <div class="nav-link">
+                      <a href="/event/index.html">Event</a>
+                    </div>
+                  </div>
+                  <div class="nav-button">
+                    <button id="navLoginButton" class="hidden">Login</button>
+                    <button id="navLogoutButton" class="hidden">Logout</button>
+                  </div>
+                </nav>
+              </aside>
+            </div>
+            <div class="login-logout-button">
+              <button id="logoutButton" class="hidden">Logout</button>
+              <button id="loginButton" class="hidden">Login</button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="task">
+        <div id="userLoggedIn" class="hidden">
+          <h1>Todo & Activities</h1>
+          <form id="todo-form">
+            <label for="todo-title">Title:</label>
+            <input type="text" id="todo-title" required />
 
-    </div>
-</body>
+            <label for="todo-description">Description:</label>
+            <input type="text" id="todo-description" required />
+
+            <label for="todo-time">Time estimate (min):</label>
+            <input type="number" id="todo-time" required />
+
+            <label for="todo-category">Category:</label>
+            <select id="todo-category" required>
+              <option value="Health">Health</option>
+              <option value="Household">Household</option>
+              <option value="Job">Job</option>
+              <option value="Pleasure">Pleasure</option>
+            </select>
+
+            <label for="todo-deadline">Deadline:</label>
+            <input type="date" id="todo-deadline" required />
+
+            <button type="submit">Add todo</button>
+          </form>
+
+          <label for="filter">Filter:</label>
+          <select id="filter">
+            <option value="all">All</option>
+            <option value="true">Completed</option>
+            <option value="false">Not completed</option>
+          </select>
+
+          <label for="sort">Sort by:</label>
+          <select id="sort">
+            <option value="deadline">Deadline</option>
+            <option value="timeEstimate">Time estimate</option>
+          </select>
+          <h2>Todos & Activities</h2>
+          <ul id="todo-list"></ul>
+        </div>
+      </main>
+      <footer>
+        <div class="footer-container">
+          <p>&copy; 2025 Productivity Assistant. All rights reserved.</p>
+        </div>
+      </footer>
+    </body>
+  </head>
 </html>
